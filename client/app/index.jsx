@@ -1,12 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import Poll from "./poll";
 
-class Test extends React.Component {
-    render() {
-        return (
-            <p>Hello, world!</p>
-        );
-    }
-}
-
-ReactDOM.render(<Test />, document.getElementById("app"));
+ReactDOM.render(<Poll />, document.getElementById("app"));

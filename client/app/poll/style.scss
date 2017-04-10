@@ -1,0 +1,46 @@
+$poll-width: 16em;
+$poll-height: ($poll-width / 1.3em) * 1em;
+
+.poll {
+    text-align: center;
+    background: #fff;
+    width: $poll-width;
+    height: $poll-height;
+    box-shadow: 4px 4px 12px;
+
+    .header {
+        h2 {
+            color: $title-color;
+        }
+
+        h3 {
+            color: $secondary-title-color;
+            font-size: 0.75em;
+        }
+    }
+
+    .progress {
+        border-color: #000;
+        border-style: solid;
+        border-width: 1px;
+
+        p {
+            font-weight: bold;
+            color: #000;
+        }
+
+        .progress-bar {
+            background: #dce9bb;
+        }
+    }
+
+    .poll-tags {
+        font-size: 0.5em;
+
+        a {
+            padding: 4px;
+            color: $secondary-title-color;
+            text-decoration: none;
+        }
+    }
+}
