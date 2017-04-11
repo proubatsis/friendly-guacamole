@@ -2,7 +2,8 @@ import React from "react";
 import PollOption from "./option";
 
 const formatVoteCount = totalVotes => {
-    if(totalVotes > 1000) return (Math.round((totalVotes / 1000) * 10) / 10) + "k";
+    if(totalVotes > 1000000) return Math.round((totalVotes / 1000000) * 10) / 10 + "M";
+    else if(totalVotes > 1000) return (Math.round((totalVotes / 1000) * 10) / 10) + "k";
     else return totalVotes;
 };
 
