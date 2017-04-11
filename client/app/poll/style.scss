@@ -17,6 +17,12 @@ $poll-height: ($poll-width / 1.3em) * 1em;
             color: $secondary-title-color;
             font-size: 0.75em;
         }
+
+        p {
+            float: left;
+            color: #b41828;
+            font-size: 0.75em;
+        }
     }
 
     .progress {
@@ -42,5 +48,9 @@ $poll-height: ($poll-width / 1.3em) * 1em;
             color: $secondary-title-color;
             text-decoration: none;
         }
+    }
+
+    .poll-option {
+        cursor: pointer;
     }
 }
