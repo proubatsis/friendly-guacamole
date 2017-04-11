@@ -11,10 +11,12 @@ class Poll extends React.Component {
         return (
             <div className="col-xs-12 poll">
                 <div className="header row">
+                    <p>&#x1f525; {formatVoteCount(this.props.totalVotes)}</p>
+                </div>
+                <div className="header row">
                     <div className="col-xs-12">
-                        <p>&#x1f525; {formatVoteCount(this.props.totalVotes)}</p>
-                        <h2>Poll Title</h2>
-                        <h3>Poll description</h3>
+                        <h2>{this.props.title}</h2>
+                        <h3>{this.props.description}</h3>
                     </div>
                 </div>
                 <div className="row">
