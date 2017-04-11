@@ -9,7 +9,7 @@ class PollOption extends React.Component {
     }
 
     render() {
-        const percent = (this.props.value / this.props.totalVotes) * 100;
+        const percent = (this.props.count / this.props.totalVotes) * 100;
 
         return (
             <div className="row poll-option">
@@ -20,7 +20,7 @@ class PollOption extends React.Component {
                     <div className="progress">
                         <div className="progress-bar"
                             role="progressbar"
-                            aria-valuenow={this.props.value}
+                            aria-valuenow={this.props.count}
                             aria-valuemin="0"
                             aria-valuemax={this.props.totalVotes}
                             style={{width: `${percent}%`}}>
