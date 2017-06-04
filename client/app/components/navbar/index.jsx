@@ -15,8 +15,15 @@ class Navbar extends React.Component {
                     <div className="navbar-header">
                         <a className="navbar-brand" href="#">Friendly Guacamole</a>
                     </div>
+
                     <ul className="nav navbar-nav">
                         {renderTrending(this.props.trending)}
+                    </ul>
+
+                    <ul className="nav navbar-nav navbar-right">
+                        <li><a href="#">Search</a></li>
+                        <li><a href="#">Edit</a></li>
+                        <li><a href="#">Login</a></li>
                     </ul>
                 </div>
             </nav>
