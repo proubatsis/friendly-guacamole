@@ -1,5 +1,5 @@
 import React from "react";
-import Poll from "../../poll";
+import Poll from "../../components/poll";
 import R from "ramda";
 
 const POLLS_PER_ROW = 3;
