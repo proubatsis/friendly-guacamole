@@ -22,6 +22,11 @@ module.exports = {
                 loader: ExtractTextPlugin.extract({
                     use: ["css-loader", "sass-loader"]
                 })
+            },
+            {
+                test: /\.png$/,
+                exclude: /node_modules/,
+                loader: "file-loader"
             }
         ]
     },
