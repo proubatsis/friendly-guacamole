@@ -14,25 +14,85 @@ const store = createStore(reducer, {
     home: {
         polls: [
             {
-                    id: "1",
-                    title: "Coca Cola or Pepsi?",
-                    description: "Just wanna know what ppl prefer",
-                    totalVotes: 1000,
-                    options: [
-                        {
-                            id: "1",
-                            name: "Coca Cola",
-                            count: 750,
-                            selected: false
-                        },
-                        {
-                            id: "2",
-                            name: "Pepsi",
-                            count: 250,
-                            selected: false
-                        }
-                    ]
-                }
+                id: "1",
+                title: "Coca Cola or Pepsi?",
+                description: "Just wanna know what ppl prefer",
+                totalVotes: 1000,
+                options: [
+                    {
+                        id: "1",
+                        name: "Coca Cola",
+                        count: 750,
+                        selected: false
+                    },
+                    {
+                        id: "2",
+                        name: "Pepsi",
+                        count: 250,
+                        selected: false
+                    }
+                ]
+            },
+            {
+                id: "1",
+                title: "Coca Cola or Pepsi?",
+                description: "Just wanna know what ppl prefer",
+                totalVotes: 1000,
+                options: [
+                    {
+                        id: "1",
+                        name: "Coca Cola",
+                        count: 750,
+                        selected: false
+                    },
+                    {
+                        id: "2",
+                        name: "Pepsi",
+                        count: 250,
+                        selected: false
+                    }
+                ]
+            },
+            {
+                id: "1",
+                title: "Coca Cola or Pepsi?",
+                description: "Just wanna know what ppl prefer",
+                totalVotes: 1000,
+                options: [
+                    {
+                        id: "1",
+                        name: "Coca Cola",
+                        count: 750,
+                        selected: false
+                    },
+                    {
+                        id: "2",
+                        name: "Pepsi",
+                        count: 250,
+                        selected: false
+                    }
+                ]
+            },
+            {
+                id: "1",
+                title: "Coca Cola or Pepsi?",
+                description: "Just wanna know what ppl prefer",
+                totalVotes: 1000,
+                options: [
+                    {
+                        id: "1",
+                        name: "Coca Cola",
+                        count: 750,
+                        selected: false
+                    },
+                    {
+                        id: "2",
+                        name: "Pepsi",
+                        count: 250,
+                        selected: false
+                    }
+                ]
+            }
         ]
     }
 });

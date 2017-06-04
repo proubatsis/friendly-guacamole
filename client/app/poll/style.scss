@@ -1,12 +1,9 @@
-$poll-width: 16em;
-$poll-height: ($poll-width / 1.3em) * 1em;
-
 .poll {
     text-align: center;
     background: #fff;
-    width: $poll-width;
-    height: $poll-height;
     box-shadow: 4px 4px 12px;
+    height: 12em;
+    margin-top: 16px;
 
     .header {
         h2 {
