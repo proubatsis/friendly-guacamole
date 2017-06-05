@@ -7,7 +7,7 @@ import CreateImage from "../../images/create.png";
 import UserImage from "../../images/user.png";
 
 const renderTrending = R.map(trending => (
-    <li>
+    <li key={trending}>
         <a href="#">#{trending}</a>
     </li>
 ));
@@ -17,7 +17,7 @@ class Navbar extends React.Component {
         super(props);
         props.fetchTrending();
     }
-    
+
     render() {
         return (
             <nav className="navbar navbar-default">
