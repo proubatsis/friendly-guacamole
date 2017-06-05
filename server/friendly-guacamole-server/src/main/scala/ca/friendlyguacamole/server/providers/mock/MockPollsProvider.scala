@@ -33,4 +33,14 @@ object MockPollsProvider extends PollsProvider{
       )
     }
   }
+
+  override def getTrendingTags(): Task[Seq[String]] = {
+    Task.now {
+      List(
+        "Toronto",
+        "Pineapples",
+        "Monkey"
+      )
+    }
+  }
 }

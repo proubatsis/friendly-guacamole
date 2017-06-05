@@ -17,6 +17,8 @@ object PollsService {
     HttpService {
       case GET -> Root / "polls" =>
         Ok(pollsProvider.getPolls())
+      case GET -> Root / "polls" / "trending" =>
+        Ok(pollsProvider.getTrendingTags())
     }
   }
 }
