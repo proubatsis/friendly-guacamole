@@ -13,6 +13,11 @@ const renderTrending = R.map(trending => (
 ));
 
 class Navbar extends React.Component {
+    constructor(props) {
+        super(props);
+        props.fetchTrending();
+    }
+    
     render() {
         return (
             <nav className="navbar navbar-default">

@@ -16,11 +16,7 @@ const reducer = combineReducers({
 
 const store = createStore(reducer, {
     navbar: {
-        trending: [
-            "pineapples",
-            "monkeys",
-            "toronto"
-        ]
+        trending: []
     },
     home: {
         polls: [

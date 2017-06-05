@@ -43,5 +43,13 @@ module.exports = {
     ],
     resolve: {
         extensions: [".js", ".jsx"]
+    },
+    devServer: {
+        proxy: {
+            "/api": {
+                target: "http://localhost:8081",
+                secure: false
+            }
+        }
     }
 };
