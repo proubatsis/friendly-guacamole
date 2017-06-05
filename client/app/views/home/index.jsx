@@ -17,6 +17,11 @@ const renderRows = R.map(row => (
 ));
 
 class HomeView extends React.Component {
+    constructor(props) {
+        super(props);
+        props.fetchPolls();
+    }
+    
     render() {
         const rows = R.splitEvery(POLLS_PER_ROW, this.props.polls);
 
