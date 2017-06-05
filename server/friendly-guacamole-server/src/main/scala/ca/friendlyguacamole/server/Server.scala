@@ -2,10 +2,11 @@ package ca.friendlyguacamole.server
 
 import java.util.concurrent.{ExecutorService, Executors}
 
+import ca.friendlyguacamole.server.providers.mock.MockPollsProvider
+import ca.friendlyguacamole.server.services.PollsService
+
 import scala.util.Properties.envOrNone
-
 import scalaz.concurrent.Task
-
 import org.http4s.server.{Server, ServerApp}
 import org.http4s.server.blaze.BlazeBuilder
 
@@ -20,6 +21,7 @@ object BlazeExample extends ServerApp {
     BlazeBuilder
       .bindHttp(port, ip)
       .mountService(HelloWorld.service)
+      .mountService(PollsService.service(MockPollsProvider))
       .withServiceExecutor(pool)
       .start
 }
