@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { combineReducers, createStore } from "redux";
 import { Provider } from "react-redux";
+import { Router, Route, useRouterHistory } from "react-router";
+import { createBrowserHistory } from "history";
 
 import Navbar from "./components/navbar/container";
 import NavbarReducer from "./components/navbar/reducer";
@@ -27,7 +29,9 @@ ReactDOM.render(
     <Provider store={store}>
         <div>
             <Navbar />
-            <HomeView />
+            <Router history={createBrowserHistory({})}>
+                <Route path="/" component={HomeView} />
+            </Router>
         </div>
     </Provider>,
     document.getElementById("app"));
