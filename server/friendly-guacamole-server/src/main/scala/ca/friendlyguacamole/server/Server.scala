@@ -20,7 +20,7 @@ object BlazeExample extends ServerApp {
   override def server(args: List[String]): Task[Server] =
     BlazeBuilder
       .bindHttp(port, ip)
-      .mountService(PollsService.service(MockPollsProvider))
+      .mountService(PollsService.service(MockPollsProvider), "/api/polls")
       .withServiceExecutor(pool)
       .start
 }

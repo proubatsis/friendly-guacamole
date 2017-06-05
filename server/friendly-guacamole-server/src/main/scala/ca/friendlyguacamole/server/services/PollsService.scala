@@ -15,9 +15,9 @@ object PollsService {
 
   def service(pollsProvider: PollsProvider): HttpService = {
     HttpService {
-      case GET -> Root / "polls" =>
+      case GET -> Root =>
         Ok(pollsProvider.getPolls())
-      case GET -> Root / "polls" / "trending" =>
+      case GET -> Root / "trending" =>
         Ok(pollsProvider.getTrendingTags())
     }
   }
