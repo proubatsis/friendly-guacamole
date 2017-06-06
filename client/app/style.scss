@@ -6,6 +6,7 @@ $secondary-title-color: #7b4724;
 
 @import "./components/poll/style.scss";
 @import "./components/navbar/style.scss";
+@import "./views/poll/style.scss";
 
 body {
     font: 16pt $app-font;
