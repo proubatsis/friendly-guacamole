@@ -2,4 +2,43 @@
     background: #fff;
     text-align: center;
     box-shadow: 4px 4px 12px;
+    min-height: 60%;
+
+    .flame {
+        color: $flame-color;
+        float: left;
+        padding: 0.25em;
+    }
+
+    .copy-link {
+        color: $flame-color;
+        float: right;
+        padding: 0.25em;
+        cursor: pointer;
+    }
+
+    .poll-option {
+        padding-top: 1em;
+        cursor: pointer;
+
+        .progress {
+            height: 1.2em;
+
+            .progress-bar {
+                color: #000;
+                background: $progress-bar-color;
+            }
+        }
+    }
+
+    .title {
+        color: $title-color;
+        font-size: 1.2em;
+        font-weight: bold;
+        padding: 0.5em;
+    }
+
+    .description {
+        color: $secondary-title-color;
+    }
 }

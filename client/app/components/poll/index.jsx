@@ -1,18 +1,13 @@
 import React from "react";
 import PollOption from "./option";
-
-const formatVoteCount = totalVotes => {
-    if(totalVotes >= 1000000) return Math.round((totalVotes / 1000000) * 10) / 10 + "M";
-    else if(totalVotes >= 1000) return (Math.round((totalVotes / 1000) * 10) / 10) + "k";
-    else return totalVotes;
-};
+import { formatVoteCount, FLAME_ICON } from "../../util/poll";
 
 class Poll extends React.Component {
     render() {
         return (
             <div className="col-xs-12 poll">
                 <div className="header row">
-                    <p>&#x1f525; {formatVoteCount(this.props.totalVotes)}</p>
+                    <p>{FLAME_ICON} {formatVoteCount(this.props.totalVotes)}</p>
                 </div>
                 <div className="header row">
                     <div className="col-xs-12">

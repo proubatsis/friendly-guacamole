@@ -19,7 +19,7 @@
 
         p {
             float: left;
-            color: #b41828;
+            color: $flame-color;
             font-size: 0.75em;
         }
     }
@@ -35,7 +35,7 @@
         }
 
         .progress-bar {
-            background: #dce9bb;
+            background: $progress-bar-color;
         }
     }
 
