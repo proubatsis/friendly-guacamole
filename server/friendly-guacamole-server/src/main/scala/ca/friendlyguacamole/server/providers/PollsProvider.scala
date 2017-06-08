@@ -10,4 +10,5 @@ import scalaz.concurrent.Task
 trait PollsProvider {
   def getPolls(): Task[Seq[PollModel]]
   def getTrendingTags(): Task[Seq[String]]
+  def findPoll(id: Int): Task[Option[PollModel]]
 }
