@@ -41,4 +41,27 @@
     .description {
         color: $secondary-title-color;
     }
+
+    .poll-tags {
+        color: $title-color;
+        padding: 1em;
+    }
+}
+
+.side-card {
+    background: #fff;
+    min-height: 60%;
+    cursor: pointer;
+
+    &.left {
+        margin-left: -0.75em;
+        margin-right: 4em;
+        box-shadow: 4px 4px 12px;
+    }
+
+    &.right {
+        margin-right: -0.75em;
+        margin-left: 4em;
+        box-shadow: -4px 4px 12px;
+    }
 }
