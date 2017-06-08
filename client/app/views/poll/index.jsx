@@ -2,6 +2,9 @@ import React from "react";
 import PollOption from "../../components/poll/option";
 import { formatVoteCount, FLAME_ICON, LINK_ICON } from "../../util/poll";
 
+const PREV_ARROW_ICON = "\uD83E\uDC80";
+const NEXT_ARROW_ICON = "\uD83E\uDC82";
+
 class PollView extends React.Component {
     render() {
         return (
@@ -41,6 +44,12 @@ class PollView extends React.Component {
                     </div>
                     <div className="col-xs-2">
                         <div className="side-card right"></div>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-xs-offset-5 col-xs-5">
+                        <a href="#" className="btn btn-default btn-poll-nav">{PREV_ARROW_ICON}</a>
+                        <a href="#" className="btn btn-default btn-poll-nav">{NEXT_ARROW_ICON}</a>
                     </div>
                 </div>
             </div>
