@@ -36,7 +36,7 @@ ReactDOM.render(
             <Navbar />
             <Router history={createBrowserHistory({})}>
                 <Switch>
-                    <Route path="/poll" component={PollView} />
+                    <Route path="/polls/:id" component={PollView} />
                     <Route path="/" component={HomeView} />
                 </Switch>
             </Router>

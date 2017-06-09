@@ -8,7 +8,7 @@ const NEXT_ARROW_ICON = "\uD83E\uDC82";
 
 class PollView extends React.Component {
     componentDidMount() {
-        this.props.fetchPoll(3);
+        this.props.fetchPoll(this.props.match.params.id);
     }
 
     render() {

@@ -5,7 +5,7 @@ const path = require("path");
 
 module.exports = {
     entry: ["./app/index.jsx", "./app/style.scss"],
-    output: { path: path.join(__dirname, "dist"), filename: "app.js" },
+    output: { path: path.join(__dirname, "dist"), filename: "app.js", publicPath: "/" },
     module: {
         loaders: [
             {
