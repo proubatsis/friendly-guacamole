@@ -17,6 +17,14 @@ object PollsService {
     HttpService {
       case GET -> Root =>
         Ok(pollsProvider.getPolls())
+      case GET -> Root / IntVar(id) =>
+        for {
+          somePoll <- pollsProvider.findPoll(id)
+          response <- somePoll match {
+            case Some(poll) => Ok(poll)
+            case None => NotFound("")
+          }
+        } yield response
       case GET -> Root / "trending" =>
         Ok(pollsProvider.getTrendingTags())
     }
