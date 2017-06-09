@@ -10,8 +10,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchTrending: function() {
-            getTrending(function(err, res) {
-                if(!err) dispatch(updateTrending(res.body));
+            getTrending(function(err, trending) {
+                if(!err) dispatch(updateTrending(trending));
             });
         }
     };

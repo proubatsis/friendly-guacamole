@@ -10,8 +10,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchPolls: () => {
-            getPolls((err, res) => {
-                if(!err) dispatch(updatePolls(res.body));
+            getPolls((err, polls) => {
+                if(!err) dispatch(updatePolls(polls));
             });
         }
     };

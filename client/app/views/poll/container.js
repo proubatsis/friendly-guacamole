@@ -9,8 +9,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchPoll: id => getPoll(id, (err, res) => {
-            if(!err) dispatch(updatePollView(res.body));
+        fetchPoll: id => getPoll(id, (err, poll) => {
+            if(!err) dispatch(updatePollView(poll));
         })
     };
 };
