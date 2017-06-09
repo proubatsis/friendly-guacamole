@@ -1,6 +1,7 @@
 import React from "react";
 import PollOption from "../../components/poll/option";
 import { formatVoteCount, FLAME_ICON, LINK_ICON } from "../../util/poll";
+import R from "ramda";
 
 const PREV_ARROW_ICON = "\uD83E\uDC80";
 const NEXT_ARROW_ICON = "\uD83E\uDC82";
@@ -11,6 +12,16 @@ class PollView extends React.Component {
     }
 
     render() {
+        const renderedOptions = R.map(opt => (
+            <PollOption
+                key={opt.id}
+                selected={opt.selected}
+                name={opt.name}
+                totalVotes={this.props.totalVotes}
+                count={opt.count}
+            />
+        ));
+
         return (
             <div className="container-fluid">
                 <div className="row">
@@ -35,8 +46,7 @@ class PollView extends React.Component {
                                     <p className="description">{this.props.description}</p>
                                 </div>
                                 <div className="row">
-                                    <PollOption count={7} totalVotes={10} name="Coke" />
-                                    <PollOption count={3} totalVotes={10} name="Pepsi" />
+                                    {renderedOptions(this.props.options || [])}
                                 </div>
                                 <div className="row">
                                     <a className="poll-tags" href="#">#myamazingtag</a>
