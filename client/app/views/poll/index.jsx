@@ -6,6 +6,10 @@ const PREV_ARROW_ICON = "\uD83E\uDC80";
 const NEXT_ARROW_ICON = "\uD83E\uDC82";
 
 class PollView extends React.Component {
+    componentDidMount() {
+        this.props.fetchPoll(3);
+    }
+
     render() {
         return (
             <div className="container-fluid">

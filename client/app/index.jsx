@@ -27,28 +27,7 @@ const store = createStore(reducer, {
     home: {
         polls: []
     },
-    poll: {
-        "id": 1,
-        "title": "Coke vs Pepsi",
-        "description": "Just wanna know what ppl prefer",
-        "totalVotes": 10000,
-        "options": [
-          {
-            "id": 1,
-            "pollId": 1,
-            "name": "Coke",
-            "count": 7500,
-            "selected": null
-          },
-          {
-            "id": 2,
-            "pollId": 1,
-            "name": "Pepsi",
-            "count": 2500,
-            "selected": null
-          }
-        ]
-  }
+    poll: {}
 });
 
 ReactDOM.render(
