@@ -1,0 +1,26 @@
+.message-box {
+    position: fixed;
+    left: 25%;
+    top: 8px;
+    width: 50%;
+    height: 4em;
+    border-radius: 4px;
+    z-index: 10;
+    text-align: center;
+
+    &.success {
+        background: rgba(0, 200, 0, 0.9);
+    }
+
+    &.info {
+        background: rgba(0, 200, 200, 0.9);
+    }
+
+    &.warning {
+        background: rgba(200, 200, 0, 0.9);
+    }
+
+    &.error {
+        background: rgba(200, 0, 0, 0.9);
+    }
+}

@@ -8,6 +8,8 @@ import { createBrowserHistory } from "history";
 import Navbar from "./components/navbar/container";
 import NavbarReducer from "./components/navbar/reducer";
 
+import MessageBox from "./components/message-box/container";
+
 import HomeView from "./views/home/container";
 import HomeViewReducer from "./views/home/reducer";
 
@@ -21,6 +23,10 @@ const reducer = combineReducers({
 });
 
 const store = createStore(reducer, {
+    messageBox: {
+        type: "sucess",
+        content: "Hello, world!"
+    },
     navbar: {
         trending: []
     },
@@ -34,6 +40,7 @@ ReactDOM.render(
     <Provider store={store}>
         <div>
             <Navbar />
+            <MessageBox />
             <Router history={createBrowserHistory({})}>
                 <Switch>
                     <Route path="/polls/:id" component={PollView} />

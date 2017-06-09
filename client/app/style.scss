@@ -9,6 +9,7 @@ $flame-color: #b41828;
 @import "./components/poll/style.scss";
 @import "./components/navbar/style.scss";
 @import "./views/poll/style.scss";
+@import "./components/message-box/style.scss";
 
 body {
     font: 16pt $app-font;
