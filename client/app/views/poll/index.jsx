@@ -35,7 +35,7 @@ class PollView extends React.Component {
                                     <p className="flame">{FLAME_ICON} {formatVoteCount(this.props.totalVotes)}</p>
                                 </div>
                                 <div className="col-xs-11">
-                                    <p className="copy-link">{LINK_ICON}</p>
+                                    <p onClick={this.props.copyUrlToClipboard} className="copy-link">{LINK_ICON}</p>
                                 </div>
                             </div>
                             <div className="col-xs-8 col-xs-offset-2">
