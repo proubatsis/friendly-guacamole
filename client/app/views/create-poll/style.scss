@@ -1,0 +1,20 @@
+.create-poll-view {
+    input {
+        border-style: dotted;
+        padding: 4px;
+        margin: 4px;
+        text-align: center;
+        width: 80%;
+    }
+
+    .poll-option {
+        input {
+            width: 70%;
+        }
+
+        button {
+            background: #f00;
+            color: #fff;
+        }
+    }
+}

@@ -17,11 +17,15 @@ import HomeViewReducer from "./views/home/reducer";
 import PollView from "./views/poll/container";
 import PollViewReducer from "./views/poll/reducer";
 
+import CreatePollView from "./views/create-poll/container";
+import CreatePollViewReducer from "./views/create-poll/reducer";
+
 const reducer = combineReducers({
     navbar: NavbarReducer,
     messageBox: MessageBoxReducer,
     home: HomeViewReducer,
-    poll: PollViewReducer
+    poll: PollViewReducer,
+    createPoll: CreatePollViewReducer
 });
 
 const store = createStore(reducer, {
@@ -32,7 +36,12 @@ const store = createStore(reducer, {
     home: {
         polls: []
     },
-    poll: {}
+    poll: {},
+    createPoll: {
+        title: "",
+        description: "",
+        options: []
+    }
 });
 
 ReactDOM.render(
@@ -42,6 +51,7 @@ ReactDOM.render(
             <MessageBox />
             <Router history={createBrowserHistory({})}>
                 <Switch>
+                    <Route path="/polls/create" component={CreatePollView} />
                     <Route path="/polls/:id" component={PollView} />
                     <Route path="/" component={HomeView} />
                 </Switch>
