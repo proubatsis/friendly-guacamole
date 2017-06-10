@@ -1,0 +1,16 @@
+.navbar {
+    background: linear-gradient(#fff, $app-background);
+    border-style: none;
+}
+
+.navbar-brand {
+    img {
+        max-height: 1.6em;
+    }
+}
+
+.navbar-action-item {
+    img {
+        max-height: 1.6em;
+    }
+}

@@ -1,0 +1,18 @@
+// GLOBALS
+$app-font: Helvetica, arial, sans-serif;
+$app-background: #fdf8df;
+$title-color: #75401d;
+$secondary-title-color: #7b4724;
+$progress-bar-color: #dce9bb;
+$flame-color: #b41828;
+
+@import "./components/poll/style.scss";
+@import "./components/navbar/style.scss";
+@import "./views/poll/style.scss";
+@import "./views/create-poll/style.scss";
+@import "./components/message-box/style.scss";
+
+body {
+    font: 16pt $app-font;
+    background: $app-background;
+}
