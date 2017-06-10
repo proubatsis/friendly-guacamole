@@ -8,6 +8,10 @@
     z-index: 10;
     text-align: center;
 
+    p {
+        padding-top: .5em;
+    }
+
     &.success {
         background: rgba(0, 200, 0, 0.9);
     }
@@ -22,5 +26,9 @@
 
     &.error {
         background: rgba(200, 0, 0, 0.9);
+    }
+
+    &.hidden {
+        display: none;
     }
 }

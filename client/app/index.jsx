@@ -9,6 +9,7 @@ import Navbar from "./components/navbar/container";
 import NavbarReducer from "./components/navbar/reducer";
 
 import MessageBox from "./components/message-box/container";
+import MessageBoxReducer from "./components/message-box/reducer";
 
 import HomeView from "./views/home/container";
 import HomeViewReducer from "./views/home/reducer";
@@ -18,15 +19,13 @@ import PollViewReducer from "./views/poll/reducer";
 
 const reducer = combineReducers({
     navbar: NavbarReducer,
+    messageBox: MessageBoxReducer,
     home: HomeViewReducer,
     poll: PollViewReducer
 });
 
 const store = createStore(reducer, {
-    messageBox: {
-        type: "sucess",
-        content: "Hello, world!"
-    },
+    messageBox: {},
     navbar: {
         trending: []
     },
