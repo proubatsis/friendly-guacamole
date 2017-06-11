@@ -6,6 +6,5 @@ package ca.friendlyguacamole.server.models.db
 case class Poll(
                  id: Int,
                  title: String,
-                 description: Option[String],
-                 totalVotes: Int
+                 description: Option[String]
                )

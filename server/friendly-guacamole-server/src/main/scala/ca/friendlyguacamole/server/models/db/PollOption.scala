@@ -6,7 +6,5 @@ package ca.friendlyguacamole.server.models.db
 case class PollOption(
                        id: Int,
                        pollId: Int,
-                       name: String,
-                       count: Int,
-                       selected: Option[Boolean]
+                       name: String
                      )

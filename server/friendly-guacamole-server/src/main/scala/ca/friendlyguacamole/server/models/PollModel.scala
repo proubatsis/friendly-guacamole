@@ -10,9 +10,10 @@ case class PollModel(
                     title: String,
                     description: Option[String],
                     totalVotes: Int,
-                    options: Seq[PollOption]
+                    options: Seq[PollOptionModel]
                     )
 
 object PollModel {
-  def apply(poll: Poll, options: Seq[PollOption]): PollModel = PollModel(poll.id, poll.title, poll.description, poll.totalVotes, options)
+  def apply(poll: Poll, options: Seq[PollOption]): PollModel =
+    PollModel(poll.id, poll.title, poll.description, 0, options map (o => PollOptionModel(o.id, o.pollId, o.name, 0, None)))
 }

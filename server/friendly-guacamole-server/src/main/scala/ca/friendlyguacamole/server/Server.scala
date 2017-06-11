@@ -2,7 +2,7 @@ package ca.friendlyguacamole.server
 
 import java.util.concurrent.{ExecutorService, Executors}
 
-import ca.friendlyguacamole.server.providers.mock.MockPollsProvider
+import ca.friendlyguacamole.server.providers.quill.QuillPostgresPollsProvider
 import ca.friendlyguacamole.server.services.PollsService
 
 import scala.util.Properties.envOrNone
@@ -20,7 +20,7 @@ object BlazeExample extends ServerApp {
   override def server(args: List[String]): Task[Server] =
     BlazeBuilder
       .bindHttp(port, ip)
-      .mountService(PollsService.service(MockPollsProvider), "/api/polls")
+      .mountService(PollsService.service(QuillPostgresPollsProvider), "/api/polls")
       .withServiceExecutor(pool)
       .start
 }
