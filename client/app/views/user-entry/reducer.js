@@ -1,0 +1,14 @@
+import { USER_ENTRY_UPDATE_EMAIL, USER_ENTRY_UPDATE_USERNAME, USER_ENTRY_UPDATE_PASSWORD } from "./actions";
+
+export default function(state = {}, action) {
+    switch(action.type) {
+        case USER_ENTRY_UPDATE_EMAIL:
+            return Object.assign({}, state, { email: action.email });
+        case USER_ENTRY_UPDATE_USERNAME:
+            return Object.assign({}, state, { username: action.username });
+        case USER_ENTRY_UPDATE_PASSWORD:
+            return Object.assign({}, state, { password: action.password });
+        default:
+            return state;
+    }
+}
