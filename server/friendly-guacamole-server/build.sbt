@@ -11,5 +11,7 @@ libraryDependencies ++= Seq(
  "org.http4s"     %% "http4s-dsl"          % Http4sVersion,
  "ch.qos.logback" %  "logback-classic"     % "1.2.1",
  "io.circe" %% "circe-generic" % "0.6.1",
- "io.circe" %% "circe-literal" % "0.6.1"
+ "io.circe" %% "circe-literal" % "0.6.1",
+ "io.verizon.delorean" %% "core" % "1.2.40-scalaz-7.2",
+ "io.getquill" % "quill-async-postgres_2.12" % "1.2.1"
 )

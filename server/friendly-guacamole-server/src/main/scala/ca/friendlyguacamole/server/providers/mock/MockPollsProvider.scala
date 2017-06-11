@@ -1,6 +1,7 @@
 package ca.friendlyguacamole.server.providers.mock
 
-import ca.friendlyguacamole.server.models.{PollModel, PollOption}
+import ca.friendlyguacamole.server.models.PollModel
+import ca.friendlyguacamole.server.models.db.PollOption
 import ca.friendlyguacamole.server.providers.PollsProvider
 
 import scalaz.concurrent.Task

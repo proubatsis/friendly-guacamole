@@ -1,6 +1,9 @@
 version: '2'
 services:
-  mongo:
+  db:
       ports:
-        - "27017:27017"
-      image: "mongo"
+        - "5432:5432"
+      image: "postgres"
+      environment:
+        - POSTGRES_PASSWORD=mypassword
+        
