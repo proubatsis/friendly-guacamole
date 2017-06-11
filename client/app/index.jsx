@@ -20,12 +20,16 @@ import PollViewReducer from "./views/poll/reducer";
 import CreatePollView from "./views/create-poll/container";
 import CreatePollViewReducer from "./views/create-poll/reducer";
 
+import UserEntryView from "./views/user-entry/container";
+import UserEntryViewReducer from "./views/user-entry/reducer";
+
 const reducer = combineReducers({
     navbar: NavbarReducer,
     messageBox: MessageBoxReducer,
     home: HomeViewReducer,
     poll: PollViewReducer,
-    createPoll: CreatePollViewReducer
+    createPoll: CreatePollViewReducer,
+    userEntry: UserEntryViewReducer
 });
 
 const store = createStore(reducer, {
@@ -41,6 +45,11 @@ const store = createStore(reducer, {
         title: "",
         description: "",
         options: []
+    },
+    userEntry: {
+        email: "",
+        username: "",
+        password: ""
     }
 });
 
@@ -53,6 +62,8 @@ ReactDOM.render(
                 <Switch>
                     <Route path="/polls/create" component={CreatePollView} />
                     <Route path="/polls/:id" component={PollView} />
+                    <Route path="/login" component={UserEntryView} />
+                    <Route path="/signup" component={() => <UserEntryView entryType="signup" />} />
                     <Route path="/" component={HomeView} />
                 </Switch>
             </Router>
