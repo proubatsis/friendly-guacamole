@@ -42,7 +42,14 @@ module.exports = {
         })
     ],
     resolve: {
-        extensions: [".js", ".jsx"]
+        extensions: [".js", ".jsx"],
+        alias: {
+            components: path.resolve("./app/components"),
+            elements: path.resolve("./app/elements"),
+            images: path.resolve("./app/images"),
+            util: path.resolve("./app/util"),
+            views: path.resolve("./app/views")
+        }
     },
     devServer: {
         historyApiFallback: true,
