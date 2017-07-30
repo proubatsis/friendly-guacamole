@@ -1,27 +1,47 @@
 import React from "react";
+import { Row } from "elements/bootstrap";
+import Form from "elements/form";
+import { PrimaryButton } from "elements/button";
+import TextInput from "elements/text-input";
 
 class UserEntryView extends React.Component {
     render() {
         const isSignup = this.props.entryType === "signup";
 
         return (
-            <div className="container form-group">
-                <div className="row">
+            <Form>
+                <Row>
                     <label>Email</label>
-                    <input className="form-control" value={this.props.email} onChange={e => this.props.updateEmail(e.target.value)} type="text" />
-                </div>
-                {isSignup ? (<div className="row">
-                    <label>Email</label>
-                    <input className="form-control" value={this.props.email} onChange={e => this.props.updateEmail(e.target.value)} type="text" />
-                </div>) : ("")}
-                <div className="row">
+                    <TextInput
+                        value={this.props.email}
+                        onChange={e => this.props.updateEmail(e)}
+                    />
+                </Row>
+                {isSignup ? (
+                    <Row>
+                        <label>Email</label>
+                        <TextInput
+                            value={this.props.email}
+                            onChange={e => this.props.updateEmail(e)}
+                        />
+                    </Row>
+                    ) : ("")}
+                <Row>
                     <label>Password</label>
-                    <input className="form-control" value={this.props.password} onChange={e => this.props.updatePassword(e.target.password)} type="password" />
-                </div>
-                <div className="row">
-                    <button className="btn btn-primary btn-block">{isSignup ? "Signup" : "Login"}</button>
-                </div>
-            </div>
+                    <input
+                        className="form-control"
+                        value={this.props.password}
+                        onChange={e => this.props.updatePassword(e.target.password)}
+                        type="password"
+                    />
+                </Row>
+                <Row>
+                    <PrimaryButton
+                        fill="true"
+                        value={isSignup ? "Signup" : "Login"}
+                    />
+                </Row>
+            </Form>
         );
     }
 }

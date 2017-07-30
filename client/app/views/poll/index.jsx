@@ -1,10 +1,12 @@
 import React from "react";
-import PollOption from "../../components/poll/option";
-import { formatVoteCount, FLAME_ICON, LINK_ICON } from "../../util/poll";
+import PollOption from "components/poll/option";
+import { formatVoteCount, FLAME_ICON, LINK_ICON } from "util/poll";
+import { ContainerFluid, Row, Column } from "elements/bootstrap";
+import { PollViewArea, Title, Description, PollTags, PollViewHeader, PollViewBody, FlameVotes, CopyLink, SideCard } from "./elements";
+import { LeftNavButton, RightNavButton } from "elements/nav-button";
 import R from "ramda";
 
-const PREV_ARROW_ICON = "\uD83E\uDC80";
-const NEXT_ARROW_ICON = "\uD83E\uDC82";
+const TAGS = ["myawesometag", "anothertag", "ubertag"];
 
 class PollView extends React.Component {
     componentDidMount() {
@@ -23,50 +25,36 @@ class PollView extends React.Component {
         ));
 
         return (
-            <div className="container-fluid">
-                <div className="row">
-                    <div className="col-xs-2">
-                        <div className="side-card left"></div>
-                    </div>
-                    <div className="col-xs-8">
-                        <div className="col-xs-12 poll-view">
-                            <div className="row">
-                                <div className="col-xs-1">
-                                    <p className="flame">{FLAME_ICON} {formatVoteCount(this.props.totalVotes)}</p>
-                                </div>
-                                <div className="col-xs-11">
-                                    <p onClick={this.props.copyUrlToClipboard} className="copy-link">{LINK_ICON}</p>
-                                </div>
-                            </div>
-                            <div className="col-xs-8 col-xs-offset-2">
-                                <div className="row">
-                                    <p className="title">{this.props.title}</p>
-                                </div>
-                                <div className="row">
-                                    <p className="description">{this.props.description}</p>
-                                </div>
-                                <div className="row">
-                                    {renderedOptions(this.props.options || [])}
-                                </div>
-                                <div className="row">
-                                    <a className="poll-tags" href="#">#myamazingtag</a>
-                                    <a className="poll-tags" href="#">#anothertag</a>
-                                    <a className="poll-tags" href="#">#supertag</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-xs-2">
-                        <div className="side-card right"></div>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-xs-offset-5 col-xs-5">
-                        <a href="#" className="btn btn-default btn-poll-nav">{PREV_ARROW_ICON}</a>
-                        <a href="#" className="btn btn-default btn-poll-nav">{NEXT_ARROW_ICON}</a>
-                    </div>
-                </div>
-            </div>
+            <ContainerFluid>
+                <Row>
+                    <Column xs="2">
+                        <SideCard pos="left" />
+                    </Column>
+                    <Column xs="8">
+                        <PollViewArea>
+                            <PollViewHeader>
+                                <FlameVotes votes={this.props.totalVotes} />
+                                <CopyLink onClick={this.props.copyUrlToClipboard} />
+                            </PollViewHeader>
+                            <PollViewBody>
+                                <Title>{this.props.title}</Title>
+                                <Description>{this.props.Description}</Description>
+                                <Row>{renderedOptions(this.props.options || [])}</Row>
+                                <PollTags tags={TAGS} />
+                            </PollViewBody>
+                        </PollViewArea>
+                    </Column>
+                    <Column xs="2">
+                        <SideCard pos="right" />
+                    </Column>
+                </Row>
+                <Row>
+                    <Column xs="5" xsOffset="5">
+                        <LeftNavButton url="#" />
+                        <RightNavButton url="#" />
+                    </Column>
+                </Row>
+            </ContainerFluid>
         )
     }
 }

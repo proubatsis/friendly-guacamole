@@ -1,5 +1,8 @@
 import React from "react";
 import R from "ramda";
+import { Row, Column, ContainerFluid } from "elements/bootstrap";
+import { CreatePollViewArea, Title, Description } from "./elements";
+import { DefaultButton } from "elements/button";
 
 const CHECK_MARK_SYMBOL = "	\u2714";
 
@@ -21,27 +24,26 @@ class CreatePollView extends React.Component {
 
     render() {
         return (
-            <div className="container-fluid">
-                <div className="row">
-                    <div className="col-xs-offset-2 col-xs-8 poll-view create-poll-view">
-                        <div className="row">
-                            <input type="text" className="title" value={this.props.title} onChange={e => this.props.updateTitle(e.target.value)} />
-                        </div>
-                        <div className="row">
-                            <input type="text" className="description" value={this.props.description} onChange={e => this.props.updateDescription(e.target.value)} />
-                        </div>
+            <ContainerFluid>
+                <Row>
+                    <CreatePollViewArea>
+                        <Title value={this.props.title} onChange={this.props.updateTitle} />
+                        <Description value={this.props.description} onChange={this.props.updateDescription} />
                         {createOptionInputs(this.props.updateOption, this.props.deleteOption)(this.props.options)}
-                        <div className="row">
-                            <button className="btn btn-default" onClick={() => this.props.addOption(this.props.options)}>Add Option</button>
-                        </div>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-xs-2 col-xs-offset-5">
+                        <Row>
+                            <DefaultButton
+                                value="Add Option"
+                                onClick={() => this.props.addOption(this.props.options)}
+                            />
+                        </Row>
+                    </CreatePollViewArea>
+                </Row>
+                <Row>
+                    <Column xs="2" xsOffset="5">
                         <button className="btn btn-default btn-poll-nav">{CHECK_MARK_SYMBOL}</button>
-                    </div>
-                </div>
-            </div>
+                    </Column>
+                </Row>
+            </ContainerFluid>
         );
     }
 }
