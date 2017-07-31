@@ -9,3 +9,9 @@ CREATE TABLE poll_option (
     poll_id int references poll(id),
     name text not null
 );
+
+CREATE TABLE guac_user (
+	id serial primary key,
+	username text not null,
+	password text not null
+);
