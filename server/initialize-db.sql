@@ -15,3 +15,11 @@ CREATE TABLE guac_user (
 	username text unique not null,
 	password text not null
 );
+
+CREATE TABLE poll_option_vote (
+	id serial primary key,
+	guac_user_id int not null references guac_user(id),
+	poll_id int not null references poll(id),
+	poll_option_id int not null references poll_option(id),
+	unique (guac_user_id, poll_id)
+);
