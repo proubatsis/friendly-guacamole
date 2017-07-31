@@ -15,3 +15,6 @@ INSERT INTO poll_option (poll_id, name) VALUES
 	(3, 'Mexico'),
 	(4, 'Pizza'),
 	(4, 'Pasta');
+
+INSERT INTO guac_user (username, password) VALUES
+	("fake@fake.com", "$2a$10$I9IwD1.Ep8llpGiPaM9sCeZCJXvkzjt1iOGWlxmWZbK4W6fVwxMHO");
