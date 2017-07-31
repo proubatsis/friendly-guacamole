@@ -12,6 +12,6 @@ CREATE TABLE poll_option (
 
 CREATE TABLE guac_user (
 	id serial primary key,
-	username text not null,
+	username text unique not null,
 	password text not null
 );
