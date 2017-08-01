@@ -11,4 +11,5 @@ trait PollsProvider {
   def getPolls(): Task[Seq[PollModel]]
   def getTrendingTags(): Task[Seq[String]]
   def findPoll(id: Int): Task[Option[PollModel]]
+  def vote(userId: Int, pollId: Int, optionId: Int): Task[Int]
 }

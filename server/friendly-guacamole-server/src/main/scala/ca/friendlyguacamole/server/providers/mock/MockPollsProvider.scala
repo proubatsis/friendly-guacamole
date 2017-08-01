@@ -48,4 +48,8 @@ object MockPollsProvider extends PollsProvider{
   override def findPoll(id: Int): Task[Option[PollModel]] = {
     Task.delay(polls find (_.id == id))
   }
+
+  override def vote(userId: Int, pollId: Int, optionId: Int): Task[Int] = {
+    Task.delay(7)
+  }
 }

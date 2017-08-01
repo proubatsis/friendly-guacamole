@@ -59,4 +59,8 @@ object QuillPostgresPollsProvider extends PollsProvider {
       )
     }
   }
+
+  override def vote(userId: Index, pollId: Index, optionId: Index): Task[Index] = {
+    Task.delay(7)
+  }
 }

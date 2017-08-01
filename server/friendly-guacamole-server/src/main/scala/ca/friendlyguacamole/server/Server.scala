@@ -3,6 +3,7 @@ package ca.friendlyguacamole.server
 import java.util.concurrent.{ExecutorService, Executors}
 
 import ca.friendlyguacamole.server.providers.quill.{QuillPostgresPollsProvider, QuillUserProvider}
+import ca.friendlyguacamole.server.services.middleware.GuacAuth
 import ca.friendlyguacamole.server.services.{PollsService, UserService}
 
 import scala.util.Properties.envOrNone
@@ -20,7 +21,7 @@ object BlazeExample extends ServerApp {
   override def server(args: List[String]): Task[Server] =
     BlazeBuilder
       .bindHttp(port, ip)
-      .mountService(PollsService.service(QuillPostgresPollsProvider), "/api/polls")
+      .mountService(GuacAuth.required(PollsService.service(QuillPostgresPollsProvider)), "/api/polls")
       .mountService(UserService.service(QuillUserProvider), "/api/users")
       .withServiceExecutor(pool)
       .start
