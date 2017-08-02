@@ -21,7 +21,7 @@ object BlazeExample extends ServerApp {
   override def server(args: List[String]): Task[Server] =
     BlazeBuilder
       .bindHttp(port, ip)
-      .mountService(GuacAuth.required(PollsService.service(QuillPostgresPollsProvider)), "/api/polls")
+      .mountService(GuacAuth.optional(PollsService.service(QuillPostgresPollsProvider)), "/api/polls")
       .mountService(UserService.service(QuillUserProvider), "/api/users")
       .withServiceExecutor(pool)
       .start

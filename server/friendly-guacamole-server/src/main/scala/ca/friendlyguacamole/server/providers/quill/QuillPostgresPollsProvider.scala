@@ -1,7 +1,7 @@
 package ca.friendlyguacamole.server.providers.quill
 
-import ca.friendlyguacamole.server.models.PollModel
-import ca.friendlyguacamole.server.models.db.{Poll, PollOption}
+import ca.friendlyguacamole.server.models.{PollModel, PollOptionModel}
+import ca.friendlyguacamole.server.models.db.{Poll, PollOption, PollOptionVote}
 import ca.friendlyguacamole.server.providers.PollsProvider
 
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -17,7 +17,7 @@ object QuillPostgresPollsProvider extends PollsProvider {
   private val MaxHomePolls = 6
   import Quill.ctx._
 
-  override def getPolls(): Task[Seq[PollModel]] = {
+  override def getPolls(userId: Option[Int]): Task[Seq[PollModel]] = {
     val q = quote {
       for {
         poll <- query[Poll] take lift(MaxHomePolls)
@@ -34,20 +34,31 @@ object QuillPostgresPollsProvider extends PollsProvider {
     }
   }
 
-  override def findPoll(id: Int): Task[Option[PollModel]] = {
-    val q = quote {
+  override def findPoll(id: Int, userId: Option[Int]): Task[Option[PollModel]] = {
+    val qPollWithOptions = quote {
       for {
         poll <- query[Poll] filter (_.id == lift(id))
         pollOption <- query[PollOption] if poll.id == pollOption.pollId
       } yield (poll, pollOption)
     }
 
-    run(q).toTask map { result =>
-      val resultUnzipped = result.unzip
-      for {
-        poll <- resultUnzipped._1.headOption
-      } yield PollModel(poll, resultUnzipped._2)
+    val qPollOptionVoteCount = quote {
+      query[PollOptionVote].filter(_.pollId == lift(id)).groupBy(_.pollOptionId)
     }
+
+    val votesTask = for {
+      votesByPollOption <- run(qPollOptionVoteCount).toTask
+      voteCounts = votesByPollOption map (v => (v._1, v._2.size.toInt))
+    } yield voteCounts.toMap
+
+    for {
+      results <- run(qPollWithOptions).toTask
+      votes <- votesTask
+      resultsUnzipped = results.unzip
+    } yield for {
+      poll <- resultsUnzipped._1.headOption
+      optionModels = resultsUnzipped._2.map(po => PollOptionModel(po, votes.getOrElse(po.id, 0), None))
+    } yield PollModel(poll, optionModels)
   }
 
   override def getTrendingTags(): Task[Seq[String]] = {
