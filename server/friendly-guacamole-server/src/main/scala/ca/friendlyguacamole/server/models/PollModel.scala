@@ -14,9 +14,9 @@ case class PollModel(
                     )
 
 object PollModel {
-  def apply(poll: Poll, options: Seq[PollOptionModel]): PollModel =
+  def fromOptionModels(poll: Poll, options: Seq[PollOptionModel]): PollModel =
     PollModel(poll.id, poll.title, poll.description, options.map(_.count).sum, options)
 
-  def apply(poll: Poll, options: Seq[PollOption]): PollModel =
-    apply(poll, options map (o => PollOptionModel(o.id, o.pollId, o.name, 0, None)))
+  def fromOptions(poll: Poll, options: Seq[PollOption]): PollModel =
+    fromOptionModels(poll, options map (o => PollOptionModel(o.id, o.pollId, o.name, 0, None)))
 }

@@ -30,7 +30,7 @@ object QuillPostgresPollsProvider extends PollsProvider {
       grouped = result groupBy (_._1)
       mapped = grouped mapValues (_ map (_._2))
     } yield mapped.toList map {
-      case (poll, options) => PollModel(poll, options)
+      case (poll, options) => PollModel.fromOptions(poll, options)
     }
   }
 
@@ -43,22 +43,20 @@ object QuillPostgresPollsProvider extends PollsProvider {
     }
 
     val qPollOptionVoteCount = quote {
-      query[PollOptionVote].filter(_.pollId == lift(id)).groupBy(_.pollOptionId)
+      query[PollOptionVote].filter(_.pollId == lift(id))
     }
-
-    val votesTask = for {
-      votesByPollOption <- run(qPollOptionVoteCount).toTask
-      voteCounts = votesByPollOption map (v => (v._1, v._2.size.toInt))
-    } yield voteCounts.toMap
 
     for {
       results <- run(qPollWithOptions).toTask
-      votes <- votesTask
+      allVotes <- run(qPollOptionVoteCount).toTask
+      votesByPollOption = allVotes.groupBy(_.pollOptionId)
+      voteCounts = votesByPollOption map (v => (v._1, v._2.size.toInt))
+      votes = voteCounts.toMap
       resultsUnzipped = results.unzip
     } yield for {
       poll <- resultsUnzipped._1.headOption
       optionModels = resultsUnzipped._2.map(po => PollOptionModel(po, votes.getOrElse(po.id, 0), None))
-    } yield PollModel(poll, optionModels)
+    } yield PollModel.fromOptionModels(poll, optionModels)
   }
 
   override def getTrendingTags(): Task[Seq[String]] = {

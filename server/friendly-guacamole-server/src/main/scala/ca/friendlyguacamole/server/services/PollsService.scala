@@ -6,6 +6,7 @@ import org.http4s._
 import org.http4s.dsl._
 import io.circe.syntax._
 import io.circe.generic.auto._
+import ca.friendlyguacamole.server.implicits.AuthorizedRequest._
 
 /**
   * Created by panagiotis on 04/06/17.
@@ -15,11 +16,11 @@ object PollsService {
 
   def service(pollsProvider: PollsProvider): HttpService = {
     HttpService {
-      case GET -> Root =>
-        Ok(pollsProvider.getPolls())
-      case GET -> Root / IntVar(id) =>
+      case req @ GET -> Root =>
+        Ok(pollsProvider.getPolls(req.optionalUserId))
+      case req @ GET -> Root / IntVar(id) =>
         for {
-          somePoll <- pollsProvider.findPoll(id)
+          somePoll <- pollsProvider.findPoll(id, req.optionalUserId)
           response <- somePoll match {
             case Some(poll) => Ok(poll)
             case None => NotFound("")

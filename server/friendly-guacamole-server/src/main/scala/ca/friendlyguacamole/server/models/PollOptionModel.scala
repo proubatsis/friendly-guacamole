@@ -14,6 +14,6 @@ case class PollOptionModel(
                      )
 
 object PollOptionModel {
-  def apply(pollOption: PollOption, count: Int, selected: Option[Boolean]) =
+  def apply(pollOption: PollOption, count: Int, selected: Option[Boolean]): PollOptionModel =
     PollOptionModel(pollOption.id, pollOption.pollId, pollOption.name, count, selected)
 }
