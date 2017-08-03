@@ -19,19 +19,13 @@ object QuillPostgresPollsProvider extends PollsProvider {
 
   override def getPolls(userId: Option[Int]): Task[Seq[PollModel]] = {
     val q = quote {
-      for {
-        poll <- query[Poll] take lift(MaxHomePolls)
-        pollOption <- query[PollOption] if poll.id == pollOption.pollId
-      } yield (poll, pollOption)
+      query[Poll] map(_.id) take lift(MaxHomePolls)
     }
 
     for {
-      result <- run(q).toTask
-      grouped = result groupBy (_._1)
-      mapped = grouped mapValues (_ map (_._2))
-    } yield mapped.toList map {
-      case (poll, options) => PollModel.fromOptions(poll, options)
-    }
+      pollIds <- run(q).toTask
+      polls <- Task.gatherUnordered(pollIds map (pid => findPoll(pid, userId)))
+    } yield polls flatMap (_.toList)
   }
 
   override def findPoll(id: Int, userId: Option[Int]): Task[Option[PollModel]] = {
