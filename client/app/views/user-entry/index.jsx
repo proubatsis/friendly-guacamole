@@ -36,15 +36,6 @@ class UserEntryView extends React.Component {
                         onChange={e => this.props.updateEmail(e)}
                     />
                 </Row>
-                {isSignup ? (
-                    <Row>
-                        <label>Email</label>
-                        <TextInput
-                            value={this.props.email}
-                            onChange={e => this.props.updateEmail(e)}
-                        />
-                    </Row>
-                    ) : ("")}
                 <Row>
                     <label>Password</label>
                     <input
