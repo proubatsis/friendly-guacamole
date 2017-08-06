@@ -13,6 +13,15 @@ const renderTrending = R.map(trending => (
     </li>
 ));
 
+const loggedOutMenu = [
+    <li><Link to="/login">Login</Link></li>,
+    <li><Link to="/signup">Create Account</Link></li>
+];
+
+const loggedInMenu = [
+    <li><a href="/guac/logout">Logout</a></li>,
+];
+
 class Navbar extends React.Component {
     constructor(props) {
         super(props);
@@ -36,7 +45,16 @@ class Navbar extends React.Component {
                     <ul className="nav navbar-nav navbar-right">
                         <li><a className="navbar-action-item" href="#"><img src={SearchImage}></img></a></li>
                         <li><a className="navbar-action-item" href="#"><img src={CreateImage}></img></a></li>
-                        <li><a className="navbar-action-item" href="#"><img src={UserImage}></img></a></li>
+                        <li>
+                            <div className="navbar-action-item">
+                                <div className="dropdown">
+                                    <a className="dropdown-toggle" href="#" data-toggle="dropdown"><img src={UserImage}></img></a>
+                                    <ul className="dropdown-menu">
+                                        {global.accessToken ? loggedInMenu : loggedOutMenu}
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </nav>

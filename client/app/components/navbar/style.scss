@@ -1,6 +1,16 @@
 .navbar {
     background: linear-gradient(#fff, $app-background);
     border-style: none;
+
+    .dropdown-menu {
+        background: #dce9bb;
+    }
+
+    .dropdown {
+        padding-top: 0.65em;
+        margin-left: 0.55em;
+        margin-right: 0.25em;
+    }
 }
 
 .navbar-brand {
