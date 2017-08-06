@@ -11,10 +11,7 @@ import scala.util.Try
   */
 object AuthorizedRequest {
   implicit class GuacAuthRequest(request: Request) {
-    def userId: Int =
-      request.headers.get(CaseInsensitiveString(GuacHeaders.UserId)).map(_.value.toInt).head
-
-    def optionalUserId: Option[Int] =
-      request.headers.get(CaseInsensitiveString(GuacHeaders.UserId)).flatMap(o => Try(o.value.toInt).toOption)
+    def optionalUserId: Option[Int] = request.headers.get(CaseInsensitiveString(GuacHeaders.UserId)).flatMap(o => Try(o.value.toInt).toOption)
+    def userId: Int = optionalUserId.head
   }
 }

@@ -16,8 +16,7 @@ object GuacAuth {
   def optional(service: HttpService): HttpService = Service.lift { req =>
     userIdFromRequest(req) match {
       case Some(id) =>
-        req.putHeaders(Header(GuacHeaders.UserId, id.toString))
-        service(req)
+        service(req.putHeaders(Header(GuacHeaders.UserId, id.toString)))
       case None => service(req)
     }
   }
@@ -25,8 +24,7 @@ object GuacAuth {
   def required(service: HttpService): HttpService = Service.lift { req =>
     userIdFromRequest(req) match {
       case Some(id) =>
-        req.putHeaders(Header(GuacHeaders.UserId, id.toString))
-        service(req)
+        service(req.putHeaders(Header(GuacHeaders.UserId, id.toString)))
       case None => Forbidden()
     }
   }

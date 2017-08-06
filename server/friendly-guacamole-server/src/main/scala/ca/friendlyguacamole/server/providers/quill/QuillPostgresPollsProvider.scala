@@ -73,7 +73,7 @@ object QuillPostgresPollsProvider extends PollsProvider {
 
     for {
       existing <- run(qExisting.nonEmpty).toTask
-      result <- if (existing) {
+      result <- if (!existing) {
         for {
           _ <- run(query[PollOptionVote].insert(lift(PollOptionVote(0, userId, pollId, optionId))).returning(_.id)).toTask
           poll <- findPoll(pollId, Some(userId))

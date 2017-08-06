@@ -15,7 +15,7 @@ import ca.friendlyguacamole.server.services.middleware.GuacAuth
 object PollsService {
   implicit def jsonEncoder[A](implicit encoder: Encoder[A]): EntityEncoder[A] = circe.jsonEncoderOf[A]
 
-  private def serviceFetch(pollsProvider: PollsProvider): HttpService = GuacAuth.required {
+  private def serviceFetch(pollsProvider: PollsProvider): HttpService = GuacAuth.optional {
     HttpService {
       case req @ GET -> Root =>
         Ok(pollsProvider.getPolls(req.optionalUserId))
