@@ -1,6 +1,7 @@
 export const USER_ENTRY_UPDATE_EMAIL = "user entry update email";
 export const USER_ENTRY_UPDATE_USERNAME = "user entry update username";
 export const USER_ENTRY_UPDATE_PASSWORD = "user entry update password";
+export const USER_ENTRY_SUCCESS = "user entry success";
 
 export const updateEmail = email => ({
     type: USER_ENTRY_UPDATE_EMAIL,
@@ -15,4 +16,9 @@ export const updateUsername = username => ({
 export const updatePassword = password => ({
     type: USER_ENTRY_UPDATE_PASSWORD,
     password: password
+});
+
+export const setSuccess = isSuccess => ({
+    isSuccess,
+    type: USER_ENTRY_SUCCESS
 });

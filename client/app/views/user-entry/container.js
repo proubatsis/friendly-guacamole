@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { updateEmail, updateUsername, updatePassword } from "./actions";
+import { updateEmail, updateUsername, updatePassword, setSuccess } from "./actions";
 import { getPolls } from "../../ApiClient";
 import UserView from "./index";
 
@@ -11,7 +11,8 @@ const mapDispatchToProps = dispatch => {
     return {
         updateEmail: email => dispatch(updateEmail(email)),
         updateUsername: username => dispatch(updateUsername(username)),
-        updatePassword: password => dispatch(updatePassword(password))
+        updatePassword: password => dispatch(updatePassword(password)),
+        setSuccess: isSuccess => dispatch(setSuccess(isSuccess))
     };
 };
 

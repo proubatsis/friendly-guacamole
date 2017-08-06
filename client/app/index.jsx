@@ -49,7 +49,8 @@ const store = createStore(reducer, {
     userEntry: {
         email: "",
         username: "",
-        password: ""
+        password: "",
+        isSuccess: false
     }
 });
 
