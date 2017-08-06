@@ -37,15 +37,14 @@ object QuillPostgresPollsProvider extends PollsProvider {
     }
 
     val qPollOptionVoteCount = quote {
-      query[PollOptionVote].filter(_.pollId == lift(id))
+      query[PollOptionVote] filter (_.pollId == lift(id)) groupBy(_.pollOptionId) map {
+        case (optId, votes) => (optId, votes.size)
+      }
     }
 
     for {
       results <- run(qPollWithOptions).toTask
-      allVotes <- run(qPollOptionVoteCount).toTask
-      votesByPollOption = allVotes.groupBy(_.pollOptionId)
-      voteCounts = votesByPollOption map (v => (v._1, v._2.size.toInt))
-      votes = voteCounts.toMap
+      votes <- run(qPollOptionVoteCount).toTask map (_.toMap mapValues (_.toInt))
       resultsUnzipped = results.unzip
     } yield for {
       poll <- resultsUnzipped._1.headOption
