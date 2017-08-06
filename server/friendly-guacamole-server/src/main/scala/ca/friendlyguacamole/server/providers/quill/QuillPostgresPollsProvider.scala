@@ -42,13 +42,22 @@ object QuillPostgresPollsProvider extends PollsProvider {
       }
     }
 
+    val tPollOptionVoteSelected = userId match {
+      case Some(uid) =>
+        run(query[PollOptionVote]
+          .filter(v => v.pollId == lift(id) && v.guacUserId == lift(uid))
+          .map(_.pollOptionId)).toTask
+      case None => Task.delay(List())
+    }
+
     for {
       results <- run(qPollWithOptions).toTask
       votes <- run(qPollOptionVoteCount).toTask map (_.toMap mapValues (_.toInt))
+      selected <- tPollOptionVoteSelected
       resultsUnzipped = results.unzip
     } yield for {
       poll <- resultsUnzipped._1.headOption
-      optionModels = resultsUnzipped._2.map(po => PollOptionModel(po, votes.getOrElse(po.id, 0), None))
+      optionModels = resultsUnzipped._2.map(po => PollOptionModel(po, votes.getOrElse(po.id, 0), userId map (_ => selected.contains(po.id))))
     } yield PollModel.fromOptionModels(poll, optionModels)
   }
 
