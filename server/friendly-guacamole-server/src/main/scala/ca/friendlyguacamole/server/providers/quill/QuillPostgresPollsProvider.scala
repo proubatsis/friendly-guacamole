@@ -63,7 +63,24 @@ object QuillPostgresPollsProvider extends PollsProvider {
     }
   }
 
-  override def vote(userId: Index, pollId: Index, optionId: Index): Task[Index] = {
-    Task.delay(7)
+  override def vote(userId: Index, pollId: Index, optionId: Index): Task[Option[PollModel]] = {
+    val qExisting = quote {
+      for {
+        poll <- query[Poll] if poll.id == lift(pollId)
+        vote <- query[PollOptionVote] if vote.pollId == poll.id && vote.guacUserId == lift(userId)
+      } yield vote
+    }
+
+    for {
+      existing <- run(qExisting.nonEmpty).toTask
+      result <- if (existing) {
+        for {
+          _ <- run(query[PollOptionVote].insert(lift(PollOptionVote(0, userId, pollId, optionId))).returning(_.id)).toTask
+          poll <- findPoll(pollId, Some(userId))
+        } yield poll
+      } else {
+        Task.delay(None)
+      }
+    } yield result
   }
 }

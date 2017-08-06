@@ -1,6 +1,6 @@
 package ca.friendlyguacamole.server.util
 
-import pdi.jwt.{Jwt, JwtAlgorithm, JwtClaim}
+import pdi.jwt.{Jwt, JwtAlgorithm, JwtCirce, JwtClaim}
 
 import scala.util.Try
 
@@ -13,14 +13,16 @@ object Token {
   private val TExpirySeconds = 60 * 16
 
   def toToken(userId: Int): String = {
-    Jwt.encode(JwtClaim(userId.toString).expiresIn(TExpirySeconds), TSecret, TAlgorithm)
+    val jsonString = "{\"userId\":" + userId.toString + "}"
+    Jwt.encode(JwtClaim(jsonString).issuedNow.expiresIn(TExpirySeconds), TSecret, TAlgorithm)
   }
 
   def fromToken(token: String): Option[Int] = {
-    for {
-      decoded <- Jwt.decode(token, TSecret, Seq(TAlgorithm)).toOption
-      _ = println(decoded)
-      userId <- Try(decoded.toInt).toOption
+    val tryToken = for {
+      decoded <- JwtCirce.decodeJson(token, TSecret, Seq(TAlgorithm))
+      userId <- decoded.hcursor.downField("userId").as[Int].toTry
     } yield userId
+
+    tryToken.toOption
   }
 }

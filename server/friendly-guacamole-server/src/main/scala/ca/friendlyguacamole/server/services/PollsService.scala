@@ -7,6 +7,7 @@ import org.http4s.dsl._
 import io.circe.syntax._
 import io.circe.generic.auto._
 import ca.friendlyguacamole.server.implicits.AuthorizedRequest._
+import ca.friendlyguacamole.server.services.middleware.GuacAuth
 
 /**
   * Created by panagiotis on 04/06/17.
@@ -14,7 +15,7 @@ import ca.friendlyguacamole.server.implicits.AuthorizedRequest._
 object PollsService {
   implicit def jsonEncoder[A](implicit encoder: Encoder[A]): EntityEncoder[A] = circe.jsonEncoderOf[A]
 
-  def service(pollsProvider: PollsProvider): HttpService = {
+  private def serviceFetch(pollsProvider: PollsProvider): HttpService = GuacAuth.required {
     HttpService {
       case req @ GET -> Root =>
         Ok(pollsProvider.getPolls(req.optionalUserId))
@@ -30,5 +31,13 @@ object PollsService {
         Ok(pollsProvider.getTrendingTags())
     }
   }
-}
 
+  private def serviceUpdate(pollsProvider: PollsProvider): HttpService = GuacAuth.required {
+    HttpService {
+      case req @ POST -> Root / IntVar(pollId) / IntVar(optId) / "vote" =>
+        Ok(pollsProvider.vote(req.userId, pollId, optId))
+    }
+  }
+
+  def service(pollsProvider: PollsProvider): HttpService = Service.withFallback(serviceUpdate(pollsProvider))(serviceFetch(pollsProvider))
+}
