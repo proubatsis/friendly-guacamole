@@ -57,7 +57,6 @@ const store = createStore(reducer, {
 ReactDOM.render(
     <Provider store={store}>
         <div>
-            <Navbar />
             <MessageBox />
             <Router history={createBrowserHistory({})}>
                 <Switch>

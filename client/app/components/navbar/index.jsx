@@ -1,5 +1,6 @@
 import React from "react";
 import R from "ramda";
+import { Link } from "react-router-dom";
 
 import BrandImage from "../../images/brand.png";
 import SearchImage from "../../images/search.png";
@@ -23,9 +24,9 @@ class Navbar extends React.Component {
             <nav className="navbar navbar-default">
                 <div className="container-fluid">
                     <div className="navbar-header">
-                        <a className="navbar-brand" href="#">
-                            <img src={BrandImage}></img>
-                        </a>
+                        <div className="navbar-brand" href="#">
+                            <Link to="/"><img src={BrandImage}></img></Link>
+                        </div>
                     </div>
 
                     <ul className="nav navbar-nav">

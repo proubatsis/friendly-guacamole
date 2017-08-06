@@ -5,6 +5,7 @@ import { ContainerFluid, Row, Column } from "elements/bootstrap";
 import { PollViewArea, Title, Description, PollTags, PollViewHeader, PollViewBody, FlameVotes, CopyLink, SideCard } from "./elements";
 import { LeftNavButton, RightNavButton } from "elements/nav-button";
 import R from "ramda";
+import withNavbar from "util/with-navbar";
 
 const TAGS = ["myawesometag", "anothertag", "ubertag"];
 
@@ -58,4 +59,4 @@ class PollView extends React.Component {
     }
 }
 
-export default PollView;
+export default withNavbar(PollView);

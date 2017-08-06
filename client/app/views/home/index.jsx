@@ -2,6 +2,7 @@ import React from "react";
 import Poll from "components/poll";
 import R from "ramda";
 import { Row, ContainerFluid, Column } from "elements/bootstrap";
+import withNavbar from "util/with-navbar";
 
 const POLLS_PER_ROW = 3;
 
@@ -36,4 +37,4 @@ class HomeView extends React.Component {
     }
 }
 
-export default HomeView;
+export default withNavbar(HomeView);

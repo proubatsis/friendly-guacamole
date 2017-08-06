@@ -3,6 +3,7 @@ import R from "ramda";
 import { Row, Column, ContainerFluid } from "elements/bootstrap";
 import { CreatePollViewArea, Title, Description } from "./elements";
 import { DefaultButton } from "elements/button";
+import withNavbar from "util/with-navbar";
 
 const CHECK_MARK_SYMBOL = "	\u2714";
 
@@ -48,4 +49,4 @@ class CreatePollView extends React.Component {
     }
 }
 
-export default CreatePollView;
+export default withNavbar(CreatePollView);

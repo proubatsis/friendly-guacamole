@@ -5,6 +5,7 @@ import Form from "elements/form";
 import { PrimaryButton } from "elements/button";
 import TextInput from "elements/text-input";
 import { login, createUser } from "../../ApiClient";
+import withNavbar from "util/with-navbar";
 
 class UserEntryView extends React.Component {
     constructor(props) {
@@ -66,4 +67,4 @@ class UserEntryView extends React.Component {
     }
 }
 
-export default UserEntryView;
+export default withNavbar(UserEntryView);

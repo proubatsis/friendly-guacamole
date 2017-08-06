@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import { updatePolls } from "./actions";
 import { getPolls } from "../../ApiClient";
 import HomeView from "./index";
+import withNavbar from "util/with-navbar";
 
 const mapStateToProps = (state, ownProps) => {
     return Object.assign({}, state.home, ownProps);
