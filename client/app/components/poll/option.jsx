@@ -12,7 +12,7 @@ class PollOption extends React.Component {
         const percent = (this.props.count / this.props.totalVotes) * 100;
 
         return (
-            <div className="row poll-option">
+            <div className="row poll-option" onClick={() => this.props.onClick(this.props.id)}>
                 <div className="col-xs-1">
                     { this.props.selected ? ICON_SELECTED : ICON_NOT_SELECTED }
                 </div>

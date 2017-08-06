@@ -16,11 +16,10 @@ class PollView extends React.Component {
     render() {
         const renderedOptions = R.map(opt => (
             <PollOption
+                {...opt}
                 key={opt.id}
-                selected={opt.selected}
-                name={opt.name}
                 totalVotes={this.props.totalVotes}
-                count={opt.count}
+                onClick={() => this.props.vote(this.props.id, opt.id)}
             />
         ));
 
