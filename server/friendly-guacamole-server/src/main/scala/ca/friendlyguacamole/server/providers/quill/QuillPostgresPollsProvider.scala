@@ -1,7 +1,7 @@
 package ca.friendlyguacamole.server.providers.quill
 
 import ca.friendlyguacamole.server.models.{PollModel, PollOptionModel, PollRequest}
-import ca.friendlyguacamole.server.models.db.{Poll, PollOption, PollOptionVote}
+import ca.friendlyguacamole.server.models.db.{Poll, PollOption, PollOptionVote, PollTags}
 import ca.friendlyguacamole.server.providers.PollsProvider
 
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -15,6 +15,7 @@ import io.getquill.{PostgresAsyncContext, SnakeCase}
   */
 object QuillPostgresPollsProvider extends PollsProvider {
   private val MaxHomePolls = 6
+  private val MaxTags = 3
   import Quill.ctx._
 
   override def getPolls(userId: Option[Int]): Task[Seq[PollModel]] = {
@@ -42,6 +43,10 @@ object QuillPostgresPollsProvider extends PollsProvider {
       }
     }
 
+    val qPollTags = quote {
+      query[PollTags] filter (_.pollId == lift(id)) take lift(MaxTags)
+    }
+
     val tPollOptionVoteSelected = userId match {
       case Some(uid) =>
         run(query[PollOptionVote]
@@ -53,12 +58,13 @@ object QuillPostgresPollsProvider extends PollsProvider {
     for {
       results <- run(qPollWithOptions).toTask
       votes <- run(qPollOptionVoteCount).toTask map (_.toMap mapValues (_.toInt))
+      tags <- run(qPollTags).toTask
       selected <- tPollOptionVoteSelected
       resultsUnzipped = results.unzip
     } yield for {
       poll <- resultsUnzipped._1.headOption
       optionModels = resultsUnzipped._2.map(po => PollOptionModel(po, votes.getOrElse(po.id, 0), userId map (_ => selected.contains(po.id))))
-    } yield PollModel.fromOptionModels(poll, optionModels)
+    } yield PollModel.fromOptionModels(poll, optionModels, tags)
   }
 
   override def createPoll(pollRequest: PollRequest, userId: Int): Task[Option[PollModel]] = {

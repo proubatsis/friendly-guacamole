@@ -23,3 +23,9 @@ CREATE TABLE poll_option_vote (
 	poll_option_id int not null references poll_option(id),
 	unique (guac_user_id, poll_id)
 );
+
+CREATE TABLE poll_tags (
+	id serial primary key,
+	poll_id int not null references poll(id),
+	tag text not null
+);
