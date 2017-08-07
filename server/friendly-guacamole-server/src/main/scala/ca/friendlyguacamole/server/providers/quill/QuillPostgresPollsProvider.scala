@@ -86,13 +86,18 @@ object QuillPostgresPollsProvider extends PollsProvider {
   }
 
   override def getTrendingTags(): Task[Seq[String]] = {
-    Task.delay {
-      List(
-        "Potato",
-        "Tomato",
-        "Robot"
-      )
+    val q = quote {
+      query[PollTags]
+        .groupBy(_.tag)
+        .map({
+          case (tagName, tag) => (tagName, tag.size)
+        })
+        .sortBy(_._2)(Ord.desc)
+        .map(_._1)
+        .take(lift(MaxTags))
     }
+
+    run(q).toTask
   }
 
   override def vote(userId: Index, pollId: Index, optionId: Index): Task[Option[PollModel]] = {
