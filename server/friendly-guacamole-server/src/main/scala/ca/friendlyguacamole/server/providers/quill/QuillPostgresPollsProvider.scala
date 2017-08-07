@@ -70,7 +70,7 @@ object QuillPostgresPollsProvider extends PollsProvider {
   override def createPoll(pollRequest: PollRequest, userId: Int): Task[Option[PollModel]] = {
     val poll = Poll(0, pollRequest.title, pollRequest.description)
     val options = pollRequest.options.map(o => PollOption(0, 0, o.name))
-    val tags = pollRequest.tags.map(t => PollTags(0, 0, t))
+    val tags = pollRequest.tags.map(t => PollTags(0, 0, t.trim.toLowerCase))
 
     val qInsertPoll = quote(query[Poll].insert(lift(poll)).returning(_.id))
     val qInsertOptions = { pid: Int =>

@@ -5,7 +5,8 @@ import {
     UPDATE_OPTION,
     ADD_OPTION,
     DELETE_OPTION,
-    UPDATE_TAGS
+    UPDATE_TAGS,
+    POLL_CREATED
 } from "./actions";
 import R from "ramda";
 
@@ -27,6 +28,7 @@ const reduceOptions = (state, action) => {
 const optionsEvent = (state, action) => Object.assign({}, state, { options: reduceOptions(state.options, action) });
 
 export default function(state = {}, action) {
+    console.log(action);
     switch(action.type) {
         case LOAD_DEFAULT_STATE:
             return action.state;
@@ -36,6 +38,8 @@ export default function(state = {}, action) {
             return Object.assign({}, state, { description: action.description });
         case UPDATE_TAGS:
             return Object.assign({}, state, { tags: R.take(MAX_TAGS, action.tags) });
+        case POLL_CREATED:
+            return Object.assign({}, state, { pollId: action.pollId });
         default:
             return optionsEvent(state, action);
     }

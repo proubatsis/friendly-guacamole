@@ -2,7 +2,8 @@ export const DEFAULT_STATE = {
     title: "Poll Name",
     description: "Description of your poll",
     options: ["Option 1", "Option 2"],
-    tags: ["TagA", "TagB", "TagC"]
+    tags: ["TagA", "TagB", "TagC"],
+    pollId: null,
 };
 
 export const LOAD_DEFAULT_STATE = "create poll load default state";

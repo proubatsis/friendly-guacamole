@@ -1,5 +1,6 @@
 import React from "react";
 import R from "ramda";
+import { Redirect } from "react-router-dom";
 import { Row, Column, ContainerFluid } from "elements/bootstrap";
 import { CreatePollViewArea, Title, Description, TagsInput, TagsOutput } from "./elements";
 import { DefaultButton } from "elements/button";
@@ -54,6 +55,7 @@ class CreatePollView extends React.Component {
                         </button>
                     </Column>
                 </Row>
+                {this.props.pollId !== null ? (<Redirect to={`/polls/${this.props.pollId}`} />) : null}
             </ContainerFluid>
         );
     }

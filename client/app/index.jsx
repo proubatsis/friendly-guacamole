@@ -45,7 +45,8 @@ const store = createStore(reducer, {
         title: "",
         description: "",
         options: [],
-        tags: []
+        tags: [],
+        pollId: null
     },
     userEntry: {
         email: "",
