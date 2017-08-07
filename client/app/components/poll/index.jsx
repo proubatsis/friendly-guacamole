@@ -31,9 +31,9 @@ class Poll extends React.Component {
                     </div>
                     <div className="row">
                         <p className="poll-tags">
-                            <a href="#">#hello</a>
-                            <a href="#">#world</a>
-                            <a href="#">#lol</a>
+                            {this.props.tags.map(t => (
+                                <a href="#">#{t}</a>
+                            ))}
                         </p>
                     </div>
                 </div>

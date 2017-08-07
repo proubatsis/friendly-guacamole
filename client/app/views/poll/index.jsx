@@ -7,8 +7,6 @@ import { LeftNavButton, RightNavButton } from "elements/nav-button";
 import R from "ramda";
 import withNavbar from "util/with-navbar";
 
-const TAGS = ["myawesometag", "anothertag", "ubertag"];
-
 class PollView extends React.Component {
     componentDidMount() {
         this.props.fetchPoll(this.props.match.params.id);
@@ -40,7 +38,7 @@ class PollView extends React.Component {
                                 <Title>{this.props.title}</Title>
                                 <Description>{this.props.Description}</Description>
                                 <Row>{renderedOptions(this.props.options || [])}</Row>
-                                <PollTags tags={TAGS} />
+                                <PollTags tags={this.props.tags || []} />
                             </PollViewBody>
                         </PollViewArea>
                     </Column>
