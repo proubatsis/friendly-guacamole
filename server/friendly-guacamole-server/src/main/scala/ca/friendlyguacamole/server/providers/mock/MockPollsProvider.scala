@@ -1,6 +1,6 @@
 package ca.friendlyguacamole.server.providers.mock
 
-import ca.friendlyguacamole.server.models.{PollModel, PollOptionModel}
+import ca.friendlyguacamole.server.models.{PollModel, PollOptionModel, PollRequest}
 import ca.friendlyguacamole.server.models.db.PollOption
 import ca.friendlyguacamole.server.providers.PollsProvider
 
@@ -47,6 +47,10 @@ object MockPollsProvider extends PollsProvider{
 
   override def findPoll(id: Int, userId: Option[Int]): Task[Option[PollModel]] = {
     Task.delay(polls find (_.id == id))
+  }
+
+  override def createPoll(pollRequest: PollRequest, userId: Int): Task[Option[PollModel]] = {
+    Task.delay(polls find (_.title == pollRequest.title))
   }
 
   override def vote(userId: Int, pollId: Int, optionId: Int): Task[Option[PollModel]] = {

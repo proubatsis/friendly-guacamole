@@ -1,6 +1,6 @@
 package ca.friendlyguacamole.server.providers.quill
 
-import ca.friendlyguacamole.server.models.{PollModel, PollOptionModel}
+import ca.friendlyguacamole.server.models.{PollModel, PollOptionModel, PollRequest}
 import ca.friendlyguacamole.server.models.db.{Poll, PollOption, PollOptionVote}
 import ca.friendlyguacamole.server.providers.PollsProvider
 
@@ -59,6 +59,24 @@ object QuillPostgresPollsProvider extends PollsProvider {
       poll <- resultsUnzipped._1.headOption
       optionModels = resultsUnzipped._2.map(po => PollOptionModel(po, votes.getOrElse(po.id, 0), userId map (_ => selected.contains(po.id))))
     } yield PollModel.fromOptionModels(poll, optionModels)
+  }
+
+  override def createPoll(pollRequest: PollRequest, userId: Int): Task[Option[PollModel]] = {
+    val poll = Poll(0, pollRequest.title, pollRequest.description)
+    val options = pollRequest.options.map(o => PollOption(0, 0, o.name))
+
+    val qInsertPoll = quote(query[Poll].insert(lift(poll)).returning(_.id))
+    val qInsertOptions = { pid: Int =>
+      val updatedOptions = options.map(o => o.copy(pollId = pid)).toList
+      quote(liftQuery(updatedOptions).foreach(o => query[PollOption].insert(o).returning(_.id)))
+    }
+
+    for {
+      pollId <- run(qInsertPoll).toTask
+      qInsertOpts = qInsertOptions(pollId)
+      optionIds <- run(qInsertOpts).toTask
+      poll <- findPoll(pollId, Some(userId))
+    } yield poll
   }
 
   override def getTrendingTags(): Task[Seq[String]] = {

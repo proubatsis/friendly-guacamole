@@ -4,9 +4,10 @@ import ca.friendlyguacamole.server.providers.PollsProvider
 import io.circe.Encoder
 import org.http4s._
 import org.http4s.dsl._
-import io.circe.syntax._
+import org.http4s.circe._
 import io.circe.generic.auto._
 import ca.friendlyguacamole.server.implicits.AuthorizedRequest._
+import ca.friendlyguacamole.server.models.PollRequest
 import ca.friendlyguacamole.server.services.middleware.GuacAuth
 
 /**
@@ -36,6 +37,12 @@ object PollsService {
     HttpService {
       case req @ POST -> Root / IntVar(pollId) / IntVar(optId) / "vote" =>
         Ok(pollsProvider.vote(req.userId, pollId, optId))
+      case req @ POST -> Root =>
+        for {
+          pollRequest <- req.as(jsonOf[PollRequest])
+          poll <- pollsProvider.createPoll(pollRequest, req.userId)
+          response <- Ok(poll)
+        } yield response
     }
   }
 

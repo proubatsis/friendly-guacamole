@@ -44,7 +44,7 @@ class Navbar extends React.Component {
 
                     <ul className="nav navbar-nav navbar-right">
                         <li><a className="navbar-action-item" href="#"><img src={SearchImage}></img></a></li>
-                        <li><a className="navbar-action-item" href="#"><img src={CreateImage}></img></a></li>
+                        <li><Link className="navbar-action-item" to="/polls/create"><img src={CreateImage}></img></Link></li>
                         <li>
                             <div className="navbar-action-item">
                                 <div className="dropdown">

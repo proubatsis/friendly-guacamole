@@ -41,7 +41,12 @@ class CreatePollView extends React.Component {
                 </Row>
                 <Row>
                     <Column xs="2" xsOffset="5">
-                        <button className="btn btn-default btn-poll-nav">{CHECK_MARK_SYMBOL}</button>
+                        <button
+                            className="btn btn-default btn-poll-nav"
+                            onClick={() => this.props.createPoll(this.props.title, this.props.description, this.props.options)}
+                        >
+                            {CHECK_MARK_SYMBOL}
+                        </button>
                     </Column>
                 </Row>
             </ContainerFluid>

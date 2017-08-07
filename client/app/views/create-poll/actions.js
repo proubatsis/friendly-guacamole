@@ -10,6 +10,7 @@ export const UPDATE_DESCRIPTION = "create poll update description";
 export const UPDATE_OPTION = "create poll update option";
 export const ADD_OPTION = "create poll add option";
 export const DELETE_OPTION = "create poll delete option";
+export const POLL_CREATED = "create poll -> poll created";
 
 export const loadDefaultState = () => ({
     type: LOAD_DEFAULT_STATE,
@@ -41,4 +42,9 @@ export const addOption = () => ({
 export const deleteOption = index => ({
     type: DELETE_OPTION,
     index: index
+});
+
+export const pollCreated = pollId => ({
+    pollId,
+    type: POLL_CREATED
 });

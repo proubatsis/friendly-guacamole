@@ -1,8 +1,10 @@
 import { connect } from "react-redux";
-import { loadDefaultState, updateTitle, updateDescription, updateOption, addOption, deleteOption } from "./actions";
+import { loadDefaultState, updateTitle, updateDescription, updateOption, addOption, deleteOption, pollCreated } from "./actions";
 import { showAndHideMessageBox, DURATION_MEDIUM, MESSAGE_TYPE_ERROR } from "../../components/message-box/actions";
 import CreatePollView from "./index";
+import { createPoll } from "../../ApiClient";
 
+const ERROR_CREATING_POLL = "Error occured while creating the poll!";
 const MIN_OPTIONS_MESSAGE = "You must have at least 2 options in your poll!";
 const MAX_OPTIONS_MESSAGE = "You can only have at most 8 options in your poll!";
 const MIN_OPTIONS = 2;
@@ -25,6 +27,12 @@ const mapDispatchToProps = dispatch => {
         deleteOption: (options, index) => {
             if(options.length > MIN_OPTIONS) dispatch(deleteOption(index));
             else showAndHideMessageBox(MIN_OPTIONS_MESSAGE, MESSAGE_TYPE_ERROR, DURATION_MEDIUM, dispatch);
+        },
+        createPoll: (title, description, options) => {
+            createPoll(title, description, options.map(name => ({ name })), (err, res) => {
+                if (!err && res.body) dispatch(pollCreated(res.body.id));
+                else showAndHideMessageBox(ERROR_CREATING_POLL, MESSAGE_TYPE_ERROR, DURATION_MEDIUM, dispatch);
+            });
         }
     };
 };

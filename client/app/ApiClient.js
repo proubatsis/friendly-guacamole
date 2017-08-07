@@ -24,6 +24,7 @@ export const getPolls = get("/api/polls");
 export const getTrending = get("/api/polls/trending");
 export const getPoll = (id, next) => get(`/api/polls/${id}`)(next);
 export const vote = (pollId, pollOptionId, next) => post(`/api/polls/${pollId}/${pollOptionId}/vote`, {})(next);
+export const createPoll = (title, description, options, next) => post("/api/polls", { title, description, options })(next);
 
 export const createUser = (email, password, next) => post("/api/users/create", { email, password })(next);
 export const login = (email, password, next) => post("/api/users/login", { email, password })(next);
