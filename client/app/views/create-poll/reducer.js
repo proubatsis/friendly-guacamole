@@ -1,5 +1,15 @@
-import { LOAD_DEFAULT_STATE, UPDATE_TITLE, UPDATE_DESCRIPTION, UPDATE_OPTION, ADD_OPTION, DELETE_OPTION } from "./actions";
+import {
+    LOAD_DEFAULT_STATE,
+    UPDATE_TITLE,
+    UPDATE_DESCRIPTION,
+    UPDATE_OPTION,
+    ADD_OPTION,
+    DELETE_OPTION,
+    UPDATE_TAGS
+} from "./actions";
 import R from "ramda";
+
+const MAX_TAGS = 3;
 
 const reduceOptions = (state, action) => {
     switch(action.type) {
@@ -24,6 +34,8 @@ export default function(state = {}, action) {
             return Object.assign({}, state, { title: action.title });
         case UPDATE_DESCRIPTION:
             return Object.assign({}, state, { description: action.description });
+        case UPDATE_TAGS:
+            return Object.assign({}, state, { tags: R.take(MAX_TAGS, action.tags) });
         default:
             return optionsEvent(state, action);
     }

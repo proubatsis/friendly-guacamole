@@ -1,7 +1,8 @@
 export const DEFAULT_STATE = {
     title: "Poll Name",
     description: "Description of your poll",
-    options: ["Option 1", "Option 2"]
+    options: ["Option 1", "Option 2"],
+    tags: ["TagA", "TagB", "TagC"]
 };
 
 export const LOAD_DEFAULT_STATE = "create poll load default state";
@@ -11,6 +12,7 @@ export const UPDATE_OPTION = "create poll update option";
 export const ADD_OPTION = "create poll add option";
 export const DELETE_OPTION = "create poll delete option";
 export const POLL_CREATED = "create poll -> poll created";
+export const UPDATE_TAGS = "create poll update tags";
 
 export const loadDefaultState = () => ({
     type: LOAD_DEFAULT_STATE,
@@ -47,4 +49,9 @@ export const deleteOption = index => ({
 export const pollCreated = pollId => ({
     pollId,
     type: POLL_CREATED
+});
+
+export const updateTags = tags => ({
+    tags,
+    type: UPDATE_TAGS
 });

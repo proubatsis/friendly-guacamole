@@ -44,7 +44,8 @@ const store = createStore(reducer, {
     createPoll: {
         title: "",
         description: "",
-        options: []
+        options: [],
+        tags: []
     },
     userEntry: {
         email: "",

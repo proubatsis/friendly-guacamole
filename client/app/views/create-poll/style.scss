@@ -7,6 +7,18 @@
         width: 80%;
     }
 
+    .tags-input {
+        margin-top: 3em;
+    }
+
+    .tags-output {
+        display: inline;
+        color: $title-color;
+        margin-left: 0.5em;
+        margin-right: 0em;
+        cursor: pointer;
+    }
+
     .poll-option {
         input {
             width: 70%;

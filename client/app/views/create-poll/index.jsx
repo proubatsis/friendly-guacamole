@@ -1,7 +1,7 @@
 import React from "react";
 import R from "ramda";
 import { Row, Column, ContainerFluid } from "elements/bootstrap";
-import { CreatePollViewArea, Title, Description } from "./elements";
+import { CreatePollViewArea, Title, Description, TagsInput, TagsOutput } from "./elements";
 import { DefaultButton } from "elements/button";
 import withNavbar from "util/with-navbar";
 
@@ -37,13 +37,18 @@ class CreatePollView extends React.Component {
                                 onClick={() => this.props.addOption(this.props.options)}
                             />
                         </Row>
+                        <TagsInput
+                            value={this.props.tags.join(",")}
+                            onChange={t => this.props.updateTags(t.split(",").map(x => x.trim()))}
+                        />
+                        <TagsOutput tags={this.props.tags} />
                     </CreatePollViewArea>
                 </Row>
                 <Row>
                     <Column xs="2" xsOffset="5">
                         <button
                             className="btn btn-default btn-poll-nav"
-                            onClick={() => this.props.createPoll(this.props.title, this.props.description, this.props.options)}
+                            onClick={() => this.props.createPoll(this.props.title, this.props.description, this.props.options, this.props.tags)}
                         >
                             {CHECK_MARK_SYMBOL}
                         </button>
