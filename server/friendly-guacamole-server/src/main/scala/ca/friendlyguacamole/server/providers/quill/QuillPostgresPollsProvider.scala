@@ -22,17 +22,44 @@ object QuillPostgresPollsProvider extends PollsProvider {
 
   override def getPolls(userId: Option[Int]): Task[Seq[PollModel]] = {
     val q = quote {
-      query[Poll] sortBy(_.createdAt) map(_.id) take lift(MaxHomePolls)
+      query[Poll].sortBy(_.createdAt)(Ord.desc).map(_.id).take(lift(MaxHomePolls))
     }
 
     for {
       pollIds <- run(q).toTask
-      polls <- Task.gatherUnordered(pollIds map (pid => findPoll(pid, userId)))
-    } yield for {
-      pollId <- pollIds
-      // Display poll in sorted order
-      poll <- polls.flatMap(_.toList).find(_.id == pollId).toList
-    } yield poll
+      polls <- fetchPollsWithIds(pollIds, userId)
+    } yield polls
+  }
+
+  override def findByTag(tag: String, userId: Option[Index]): Task[Seq[PollModel]] = {
+    val q = quote {
+      query[Poll]
+        .sortBy(_.createdAt)
+        .join(query[PollTags] filter (_.tag == lift(tag)))
+        .on(_.id == _.pollId)
+        .map(_._1.id)
+        .take(lift(MaxHomePolls))
+    }
+
+    for {
+      pollIds <- run(q).toTask
+      polls <- fetchPollsWithIds(pollIds, userId)
+    } yield polls
+  }
+
+  override def search(queryString: String, userId: Option[Index]): Task[Seq[PollModel]] = {
+    val q = quote {
+      query[Poll]
+        .filter(_.title.toLowerCase like lift(s"%${queryString.toLowerCase}%"))
+        .sortBy(_.createdAt)(Ord.desc)
+        .take(lift(MaxHomePolls))
+        .map(_.id)
+    }
+
+    for {
+      pollIds <- run(q).toTask
+      polls <- fetchPollsWithIds(pollIds, userId)
+    } yield polls
   }
 
   override def findPoll(id: Int, userId: Option[Int]): Task[Option[PollModel]] = {
@@ -138,5 +165,15 @@ object QuillPostgresPollsProvider extends PollsProvider {
         Task.delay(None)
       }
     } yield result
+  }
+
+  private def fetchPollsWithIds(pollIds: List[Int], userId: Option[Int]): Task[Seq[PollModel]] = {
+    for {
+      pollOpts <- Task.gatherUnordered(pollIds map (pid => findPoll(pid, userId)))
+      polls = pollOpts flatMap (_.toList)
+    } yield for {
+      id <- pollIds
+      poll <- polls if poll.id == id
+    } yield poll
   }
 }

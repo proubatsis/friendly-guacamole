@@ -28,6 +28,10 @@ object PollsService {
             case None => NotFound("")
           }
         } yield response
+      case req @ GET -> Root / "t" / tag =>
+        Ok(pollsProvider.findByTag(tag, req.optionalUserId))
+      case req @ GET -> Root / "search" / q =>
+        Ok(pollsProvider.search(q, req.optionalUserId))
       case GET -> Root / "trending" =>
         Ok(pollsProvider.getTrendingTags())
     }

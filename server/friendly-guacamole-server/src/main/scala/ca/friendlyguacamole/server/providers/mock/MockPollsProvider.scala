@@ -35,6 +35,14 @@ object MockPollsProvider extends PollsProvider{
     Task.delay(polls)
   }
 
+  override def findByTag(tag: String, userId: Option[Int]): Task[Seq[PollModel]] = {
+    Task.delay(polls)
+  }
+
+  override def search(q: String, userId: Option[Int]): Task[Seq[PollModel]] = {
+    Task.delay(polls)
+  }
+
   override def getTrendingTags(): Task[Seq[String]] = {
     Task.delay {
       List(
