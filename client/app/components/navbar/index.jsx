@@ -19,7 +19,7 @@ const loggedOutMenu = [
 ];
 
 const loggedInMenu = [
-    <li><a href="/guac/logout">Logout</a></li>,
+    <li><a href="/api/users/logout">Logout</a></li>,
 ];
 
 const searchUrl = q => `/search/${q}`;

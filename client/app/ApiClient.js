@@ -10,12 +10,14 @@ const getToken = () => global.accessToken ? `Bearer ${global.accessToken}` : nul
 const get = uri => (next =>
     request
     .get(uri)
+    .withCredentials()
     .set({ Authorization: getToken() })
     .end(callbackTransform(next)));
 
 const post = (uri, body) => (next =>
     request
     .post(uri)
+    .withCredentials()
     .set({ Authorization: getToken() })
     .send(body)
     .end(next));

@@ -31,3 +31,10 @@ CREATE TABLE poll_tags (
 	poll_id int not null references poll(id),
 	tag text not null
 );
+
+CREATE TABLE guac_session (
+	id text primary key,
+	user_id int not null references guac_user(id),
+	created timestamp not null default now()
+);
+`

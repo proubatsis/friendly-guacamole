@@ -9,6 +9,7 @@ import io.circe.generic.auto._
 import ca.friendlyguacamole.server.implicits.AuthorizedRequest._
 import ca.friendlyguacamole.server.models.PollRequest
 import ca.friendlyguacamole.server.services.middleware.GuacAuth
+import org.http4s.server.middleware.CORS
 
 /**
   * Created by panagiotis on 04/06/17.
@@ -50,5 +51,6 @@ object PollsService {
     }
   }
 
-  def service(pollsProvider: PollsProvider): HttpService = Service.withFallback(serviceUpdate(pollsProvider))(serviceFetch(pollsProvider))
+  def service(pollsProvider: PollsProvider): HttpService =
+    CORS(Service.withFallback(serviceUpdate(pollsProvider))(serviceFetch(pollsProvider)))
 }

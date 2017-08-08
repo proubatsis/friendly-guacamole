@@ -16,7 +16,7 @@ class UserEntryView extends React.Component {
     performAction(email, password, apiFunc) {
         apiFunc(email, password, (err, res) => {
             if (!err && res.body) {
-                global.accessToken = res.body;
+                global.accessToken = res.body.token;
                 this.props.setSuccess(true);
             } else {
                 this.props.setSuccess(false);
