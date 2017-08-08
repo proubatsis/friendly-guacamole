@@ -15,10 +15,11 @@ const renderPolls = R.map(poll => (
 ));
 
 const updateView = (p) => {
+    console.log(p);
     if (p.match && p.match.params.tag) {
         p.fetchPollsByTag(p.match.params.tag);
-    } else if (p.match && p.match.params.search) {
-        p.searchPolls(p.match.params.search);
+    } else if (p.match && p.match.params.q) {
+        p.searchPolls(p.match.params.q);
     } else {
         p.fetchPolls();
     }

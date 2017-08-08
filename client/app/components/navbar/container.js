@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Navbar from "./index";
-import { updateTrending } from "./actions";
+import { updateTrending, updateSearch } from "./actions";
 import { getTrending } from "../../ApiClient";
 
 const mapStateToProps = (state, ownProps) => {
@@ -9,10 +9,13 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchTrending: function() {
+        fetchTrending: () => {
             getTrending(function(err, trending) {
                 if(!err) dispatch(updateTrending(trending));
             });
+        },
+        updateSearch: (search) => {
+            dispatch(updateSearch(search));
         }
     };
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import R from "ramda";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 import BrandImage from "../../images/brand.png";
 import SearchImage from "../../images/search.png";
@@ -22,10 +22,19 @@ const loggedInMenu = [
     <li><a href="/guac/logout">Logout</a></li>,
 ];
 
+const searchUrl = q => `/search/${q}`;
+
 class Navbar extends React.Component {
     constructor(props) {
         super(props);
         props.fetchTrending();
+        this.handleSearchKeyPress = this.handleSearchKeyPress.bind(this);
+    }
+
+    handleSearchKeyPress(e) {
+        if (e.key === "Enter") {
+            this.props.history.push(searchUrl(this.props.search));
+        }
     }
 
     render() {
@@ -43,7 +52,20 @@ class Navbar extends React.Component {
                     </ul>
 
                     <ul className="nav navbar-nav navbar-right">
-                        <li><a className="navbar-action-item" href="#"><img src={SearchImage}></img></a></li>
+                        <li>
+                            <input
+                                type="text"
+                                className="form-control search-box"
+                                placeholder="Search"
+                                onChange={e => this.props.updateSearch(e.target.value)}
+                                onKeyPress={this.handleSearchKeyPress}
+                            />
+                        </li>
+                        <li>
+                            <Link className="navbar-action-item" to={searchUrl(this.props.search)}>
+                                <img src={SearchImage}></img>
+                            </Link>
+                        </li>
                         <li><Link className="navbar-action-item" to="/polls/create"><img src={CreateImage}></img></Link></li>
                         <li>
                             <div className="navbar-action-item">
@@ -62,4 +84,4 @@ class Navbar extends React.Component {
     }
 }
 
-export default Navbar;
+export default withRouter(Navbar);

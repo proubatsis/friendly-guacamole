@@ -35,7 +35,8 @@ const reducer = combineReducers({
 const store = createStore(reducer, {
     messageBox: {},
     navbar: {
-        trending: []
+        trending: [],
+        search: ''
     },
     home: {
         polls: []
