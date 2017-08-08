@@ -1,6 +1,7 @@
 import React from "react";
 import { Row, Column } from "elements/bootstrap";
 import { formatVoteCount, FLAME_ICON, LINK_ICON } from "util/poll";
+import { Link } from "react-router-dom";
 
 // Top Level
 
@@ -51,7 +52,7 @@ const Description = props => (
 );
 
 const PollTag = props => (
-    <a className="poll-tags" href="#">#{props.children}</a>
+    <Link to={`/t/${props.children}`} className="poll-tags" href="#">#{props.children}</Link>
 );
 
 const PollTags = props => (

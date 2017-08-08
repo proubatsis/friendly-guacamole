@@ -28,7 +28,6 @@ const reduceOptions = (state, action) => {
 const optionsEvent = (state, action) => Object.assign({}, state, { options: reduceOptions(state.options, action) });
 
 export default function(state = {}, action) {
-    console.log(action);
     switch(action.type) {
         case LOAD_DEFAULT_STATE:
             return action.state;

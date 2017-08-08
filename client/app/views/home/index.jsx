@@ -14,6 +14,16 @@ const renderPolls = R.map(poll => (
     </Column>
 ));
 
+const updateView = (p) => {
+    if (p.match && p.match.params.tag) {
+        p.fetchPollsByTag(p.match.params.tag);
+    } else if (p.match && p.match.params.search) {
+        p.searchPolls(p.match.params.search);
+    } else {
+        p.fetchPolls();
+    }
+};
+
 const renderRows = R.map(row => (
     <Row key={rowKey(row)}>
         {renderPolls(row)}
@@ -23,7 +33,13 @@ const renderRows = R.map(row => (
 class HomeView extends React.Component {
     constructor(props) {
         super(props);
-        props.fetchPolls();
+        updateView(props);
+    }
+
+    componentWillUpdate(nextProps) {
+        if (this.props.location.pathname !== nextProps.location.pathname) {
+            updateView(nextProps);
+        }
     }
 
     render() {

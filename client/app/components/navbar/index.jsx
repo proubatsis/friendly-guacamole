@@ -9,7 +9,7 @@ import UserImage from "../../images/user.png";
 
 const renderTrending = R.map(trending => (
     <li key={trending}>
-        <a href="#">#{trending}</a>
+        <Link to={`/t/${trending}`}>#{trending}</Link>
     </li>
 ));
 

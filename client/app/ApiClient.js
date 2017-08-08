@@ -22,6 +22,8 @@ const post = (uri, body) => (next =>
 
 export const getPolls = get("/api/polls");
 export const getTrending = get("/api/polls/trending");
+export const findPollsByTag = (tag, next) => get(`/api/polls/t/${tag}`)(next);
+export const searchPolls = (q, next) => get(`/api/polls/search/${q}`)(next);
 export const getPoll = (id, next) => get(`/api/polls/${id}`)(next);
 export const vote = (pollId, pollOptionId, next) => post(`/api/polls/${pollId}/${pollOptionId}/vote`, {})(next);
 export const createPoll = (title, description, options, tags, next) => post("/api/polls", { title, description, options, tags })(next);

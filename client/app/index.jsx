@@ -66,6 +66,8 @@ ReactDOM.render(
                     <Route path="/polls/:id" component={PollView} />
                     <Route path="/login" component={UserEntryView} />
                     <Route path="/signup" component={() => <UserEntryView entryType="signup" />} />
+                    <Route path="/t/:tag" component={HomeView} />
+                    <Route path="/search/:q" component={HomeView} />
                     <Route path="/" component={HomeView} />
                 </Switch>
             </Router>

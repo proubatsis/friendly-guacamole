@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { updatePolls } from "./actions";
-import { getPolls } from "../../ApiClient";
+import { getPolls, findPollsByTag } from "../../ApiClient";
 import HomeView from "./index";
 import withNavbar from "util/with-navbar";
 
@@ -13,6 +13,11 @@ const mapDispatchToProps = dispatch => {
         fetchPolls: () => {
             getPolls((err, polls) => {
                 if(!err) dispatch(updatePolls(polls));
+            });
+        },
+        fetchPollsByTag: (tag) => {
+            findPollsByTag(tag, (err, polls) => {
+                if (!err) dispatch(updatePolls(polls));
             });
         }
     };
