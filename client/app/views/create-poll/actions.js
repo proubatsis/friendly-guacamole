@@ -2,7 +2,7 @@ export const DEFAULT_STATE = {
     title: "Poll Name",
     description: "Description of your poll",
     options: ["Option 1", "Option 2"],
-    tags: ["TagA", "TagB", "TagC"],
+    tags: ["Tag1", "Tag2", "Tag3"],
     pollId: null,
 };
 
