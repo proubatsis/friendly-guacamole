@@ -59,7 +59,7 @@ const store = createStore(reducer, {
 });
 
 const updateToken = (err, res) => {
-    if (err && res.body) global.accessToken = res.body.token;
+    if (!err && res.body) global.accessToken = res.body.token;
 };
 
 refresh(updateToken);
