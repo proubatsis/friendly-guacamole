@@ -12,6 +12,12 @@ class PollView extends React.Component {
         this.props.fetchPoll(this.props.match.params.id);
     }
 
+    componentWillUpdate(nextProps) {
+        if (this.props.location.pathname !== nextProps.location.pathname) {
+            nextProps.fetchPoll(nextProps.match.params.id);
+        }
+    }
+
     render() {
         const renderedOptions = R.map(opt => (
             <PollOption
@@ -48,8 +54,8 @@ class PollView extends React.Component {
                 </Row>
                 <Row>
                     <Column xs="5" xsOffset="5">
-                        <LeftNavButton url="#" />
-                        <RightNavButton url="#" />
+                        <LeftNavButton url={`/polls/${this.props.id > 0 ? this.props.id - 1 : 0}`} />
+                        <RightNavButton url={`/polls/${this.props.id + 1}`} />
                     </Column>
                 </Row>
             </ContainerFluid>

@@ -1,20 +1,16 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const PREV_ARROW_ICON = "\uD83E\uDC80";
 const NEXT_ARROW_ICON = "\uD83E\uDC82";
 
-const aTag = props => (<a {...props}>{props.children}</a>);
-
-const leftNavButton = tag => props => (
-    <a href={props.url} className="btn btn-default btn-poll-nav">{PREV_ARROW_ICON}</a>
+const LeftNavButton = props => (
+    <Link to={props.url} className="btn btn-default btn-poll-nav">{PREV_ARROW_ICON}</Link>
 );
 
-const rightNavButton = tag => props => (
-    <a href={props.url} className="btn btn-default btn-poll-nav">{NEXT_ARROW_ICON}</a>
+const RightNavButton = props => (
+    <Link to={props.url} className="btn btn-default btn-poll-nav">{NEXT_ARROW_ICON}</Link>
 );
-
-const LeftNavButton = leftNavButton(aTag);
-const RightNavButton = rightNavButton(aTag);
 
 export {
     LeftNavButton,
