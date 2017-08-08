@@ -54,7 +54,7 @@ class PollView extends React.Component {
                 </Row>
                 <Row>
                     <Column xs="5" xsOffset="5">
-                        <LeftNavButton url={`/polls/${this.props.id > 0 ? this.props.id - 1 : 0}`} />
+                        <LeftNavButton url={`/polls/${this.props.id > 1 ? this.props.id - 1 : 1}`} />
                         <RightNavButton url={`/polls/${this.props.id + 1}`} />
                     </Column>
                 </Row>
