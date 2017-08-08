@@ -4,6 +4,7 @@ import { combineReducers, createStore } from "redux";
 import { Provider } from "react-redux";
 import { Router, Route, useRouterHistory, Switch } from "react-router";
 import { createBrowserHistory } from "history";
+import { refresh } from "./ApiClient";
 
 import Navbar from "./components/navbar/container";
 import NavbarReducer from "./components/navbar/reducer";
@@ -56,6 +57,15 @@ const store = createStore(reducer, {
         isSuccess: false
     }
 });
+
+const updateToken = (err, res) => {
+    if (err && res.body) global.accessToken = res.body.token;
+};
+
+refresh(updateToken);
+setInterval(() => {
+    refresh(updateToken);
+}, 60 * 3 * 1000);
 
 ReactDOM.render(
     <Provider store={store}>

@@ -10,7 +10,7 @@ import scala.util.Try
 object Token {
   private val TAlgorithm = JwtAlgorithm.HS512
   private val TSecret = "hdeP*H#*RNuekjdsnx"
-  private val TExpirySeconds = 60 * 16
+  private val TExpirySeconds = 60 * 4
 
   def toToken(userId: Int): String = {
     val jsonString = "{\"userId\":" + userId.toString + "}"

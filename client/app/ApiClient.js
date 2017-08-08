@@ -32,3 +32,4 @@ export const createPoll = (title, description, options, tags, next) => post("/ap
 
 export const createUser = (email, password, next) => post("/api/users/create", { email, password })(next);
 export const login = (email, password, next) => post("/api/users/login", { email, password })(next);
+export const refresh = post("/api/users/refresh", {});
