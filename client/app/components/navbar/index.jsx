@@ -14,12 +14,12 @@ const renderTrending = R.map(trending => (
 ));
 
 const loggedOutMenu = [
-    <li><Link to="/login">Login</Link></li>,
-    <li><Link to="/signup">Create Account</Link></li>
+    <li key="1"><Link to="/login">Login</Link></li>,
+    <li key="2"><Link to="/signup">Create Account</Link></li>
 ];
 
 const loggedInMenu = [
-    <li><a href="/api/users/logout">Logout</a></li>,
+    <li key="3"><a href="/api/users/logout">Logout</a></li>,
 ];
 
 const searchUrl = q => `/search/${q}`;

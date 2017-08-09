@@ -9,13 +9,12 @@ const POLLS_PER_ROW = 3;
 const rowKey = R.compose(R.reduce((a, b) => a + b.toString(), ""), R.map(poll => poll.id));
 
 const renderPolls = R.map(poll => (
-    <Column xs="12" lg="4">
+    <Column key={poll.id} xs="12" lg="4">
         <Poll {...poll} />
     </Column>
 ));
 
 const updateView = (p) => {
-    console.log(p);
     if (p.match && p.match.params.tag) {
         p.fetchPollsByTag(p.match.params.tag);
     } else if (p.match && p.match.params.q) {
