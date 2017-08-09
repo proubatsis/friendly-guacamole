@@ -1,6 +1,6 @@
 organization := "ca.friendlyguacamole"
 name := "friendly-guacamole-server"
-version := "0.0.1-SNAPSHOT"
+version := "1.0.0"
 scalaVersion := "2.12.2"
 
 val Http4sVersion = "0.15.11a"
@@ -17,3 +17,12 @@ libraryDependencies ++= Seq(
   "com.pauldijou" %% "jwt-circe" % "0.14.0",
   "com.github.t3hnar" %% "scala-bcrypt" % "3.0"
 )
+
+enablePlugins(JavaServerAppPackaging)
+enablePlugins(DockerPlugin)
+enablePlugins(UniversalPlugin)
+
+dockerBaseImage := "openjdk:8-jre"
+dockerExposedPorts := Seq(8081)
+
+packageName in Docker := packageName.value

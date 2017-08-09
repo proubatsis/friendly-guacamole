@@ -37,4 +37,3 @@ CREATE TABLE guac_session (
 	user_id int not null references guac_user(id),
 	created timestamp not null default now()
 );
-`
