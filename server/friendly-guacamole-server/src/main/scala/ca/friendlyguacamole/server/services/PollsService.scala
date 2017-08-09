@@ -8,7 +8,7 @@ import org.http4s.circe._
 import io.circe.generic.auto._
 import ca.friendlyguacamole.server.implicits.AuthorizedRequest._
 import ca.friendlyguacamole.server.models.PollRequest
-import ca.friendlyguacamole.server.services.middleware.GuacAuth
+import ca.friendlyguacamole.server.services.middleware.{CommonMiddleware, GuacAuth}
 import org.http4s.server.middleware.CORS
 
 /**
@@ -52,5 +52,5 @@ object PollsService {
   }
 
   def service(pollsProvider: PollsProvider): HttpService =
-    CORS(Service.withFallback(serviceUpdate(pollsProvider))(serviceFetch(pollsProvider)))
+    CommonMiddleware(Service.withFallback(serviceUpdate(pollsProvider))(serviceFetch(pollsProvider)))
 }

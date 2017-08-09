@@ -2,6 +2,7 @@ package ca.friendlyguacamole.server.services
 
 import ca.friendlyguacamole.server.models.{LoginResponse, UserRequest}
 import ca.friendlyguacamole.server.providers.UserProvider
+import ca.friendlyguacamole.server.services.middleware.CommonMiddleware
 import io.circe.Encoder
 import org.http4s.circe._
 import org.http4s._
@@ -17,7 +18,7 @@ object UserService {
   private val SessionCookie = "my-guac-session"
   private val LogoutRedirect = Uri.unsafeFromString("/")
 
-  def service(userProvider: UserProvider): HttpService = CORS {
+  def service(userProvider: UserProvider): HttpService = CommonMiddleware {
     HttpService {
       case req @ POST -> Root / "create" =>
         for {
