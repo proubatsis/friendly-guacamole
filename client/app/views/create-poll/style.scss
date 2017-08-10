@@ -1,21 +1,27 @@
 .create-poll-view {
+    .title {
+        margin-top: 1em;
+    }
     input {
-        border-style: dotted;
-        padding: 4px;
+        border-style: dashed;
+        padding: 2px;
         margin: 4px;
         text-align: center;
         width: 80%;
+        border-radius: 4px;
+        border-width: 1.75px;
+        border-color: #DDEBB9;
     }
 
     .tags-input {
-        margin-top: 3em;
+        margin-top: 2em;
     }
 
     .tags-output {
         display: inline;
         color: $title-color;
-        margin-left: 0.5em;
-        margin-right: 0em;
+        padding-right: 0.5em;
+        font-size: 0.75em;
         cursor: pointer;
     }
 
@@ -25,7 +31,7 @@
         }
 
         button {
-            background: #f00;
+            background: #BE3A31;
             color: #fff;
         }
     }

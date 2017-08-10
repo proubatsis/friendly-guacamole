@@ -1,8 +1,9 @@
 .poll-view {
     background: #fff;
     text-align: center;
-    box-shadow: 4px 4px 12px;
+    box-shadow: 0 2px 6px 0 rgba(0,0,0,0.50);
     min-height: 60%;
+    margin-top: 2em;
 
     .flame {
         color: $flame-color;
@@ -18,33 +19,43 @@
     }
 
     .poll-option {
-        padding-top: 1em;
         cursor: pointer;
-
         .progress {
-            height: 1.2em;
+            margin-bottom: 0.75em;
+            height: 1.75em;
+            border-color: #224725;
+            border-style: solid;
+            border-width: 1px;
+            border-radius: 8px;
+        p {
+            margin: auto 0.5em;
+            padding-top: 0.4em;
+            font-size: 1.5em;
+            color: #224725;
+        }
 
-            .progress-bar {
-                color: #000;
-                background: $progress-bar-color;
+        .progress-bar {
+            color: #000;
+            background: $progress-bar-color;
             }
         }
     }
 
     .title {
         color: $title-color;
-        font-size: 1.2em;
+        font-size: 1.5em;
         font-weight: bold;
-        padding: 0.5em;
-    }
-
-    .description {
-        color: $secondary-title-color;
+        margin-bottom: 1em;
+        margin-top: -0.5rem;
     }
 
     .poll-tags {
         color: $title-color;
-        padding: 1em;
+        font-size: 0.75em;
+        font-weight: 300;
+        font-style: italic;
+        padding-right: 1em;
+        text-decoration: none;
     }
 }
 
@@ -52,17 +63,18 @@
     background: #fff;
     min-height: 60%;
     cursor: pointer;
+    margin-top: 2em;
 
     &.left {
         margin-left: -0.75em;
         margin-right: 4em;
-        box-shadow: 4px 4px 12px;
+        box-shadow: 0 2px 6px 0 rgba(0,0,0,0.50);
     }
 
     &.right {
         margin-right: -0.75em;
         margin-left: 4em;
-        box-shadow: -4px 4px 12px;
+        box-shadow: 0 2px 6px 0 rgba(0,0,0,0.50);
     }
 }
 
