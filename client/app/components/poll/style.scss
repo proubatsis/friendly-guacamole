@@ -1,21 +1,27 @@
 .poll {
     text-align: center;
     background: #fff;
-    box-shadow: 4px 4px 12px;
+    box-shadow: 0 2px 6px 0 rgba(0,0,0,0.50);
     height: 12em;
     margin-top: 16px;
+    padding: 0 2em 0;
     color: #222;
 
     .header {
+        margin-left: -1.75em;
         h2 {
+            font-size: 24px;
+            font-weight: 700;
             color: $title-color;
-            margin: 0px;
+            margin-top: -8px;
+            margin-left: 1.5em;
         }
 
         h3 {
             color: $secondary-title-color;
+            font-weight: 300;
             font-size: 0.75em;
-            margin: 0.5em;
+            margin: 0.5em 0 1em 1.5em;
         }
 
         p {
@@ -26,25 +32,36 @@
     }
 
     .progress {
-        border-color: #000;
+        border-color: #224725;
         border-style: solid;
         border-width: 1px;
+        background-color: #fdfdfd;
+        border-radius: 8px;
+        height: 1.25em;
+        margin-bottom: 0.25em;
 
         p {
-            font-weight: bold;
-            color: #000;
+            margin: auto 0.3em;
+            padding-top: 0.2em;
+            font-weight: 600;
+            font-size: 16px;
+            color: #224725;
         }
 
         .progress-bar {
+            padding: 0;
             background: $progress-bar-color;
         }
     }
 
     .poll-tags {
-        font-size: 0.5em;
+        font-size: 0.6em;
+        font-weight: 300;
+        font-style: italic;
+        margin-top: 0.5em;
 
         a {
-            padding: 4px;
+            padding-right: 1em;
             color: $secondary-title-color;
             text-decoration: none;
         }
